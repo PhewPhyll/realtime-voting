@@ -23,12 +23,12 @@ const sendEventToAll = (data) => {
 //Add Topic
 app.post('/add_topic', async (req, res) => {
     const { topics } = await req.body
-    topics.forEach(async element => {
+    await topics.forEach(async element => {
         const topic = await new TopicModel({ title: element })
         await topic.save()
     });
-    res.status(200).send({ message: `Now Added ${topics}` })
-
+    await res.status(200).send({ message: `Now Added ${topics}` })
+    sendEventToAll({topics , event : 'add'})
 })
 
 //User Vote
@@ -45,13 +45,13 @@ app.post('/voted', async (req, res) => {
     }
 
     await topic_selection.save()
-    sendEventToAll({ user, id, status: status })
+    sendEventToAll({ user, id, status: status, event : 'vote' })
     res.status(200).send({ user, id, status: status })
 })
 
 //Get Topics
 app.get('/topics', async (req, res) => {
-    const { user } = req.body
+    const user = req.query.user
     const topics = await TopicModel.find({})
     const topics_to_send = []
     for (let i = 0; i < topics.length; i++) {
