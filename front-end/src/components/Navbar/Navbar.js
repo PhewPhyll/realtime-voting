@@ -6,9 +6,9 @@ import Button from '@mui/material/Button';
 import barcampLogo from '../../image/barcampLogo.png';
 import './Navbar.css';
 
-function WebBar() {
+function NavBar() {
   return (
-    <AppBar position="static" style={{ background: "#000000"}}>
+    <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Button href='/'>
@@ -19,4 +19,4 @@ function WebBar() {
     </AppBar>
   );
 }
-export default WebBar;
+export default NavBar;

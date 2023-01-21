@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createTheme, ThemeProvider } from '@mui/material';
+import NavBar from './components/Navbar/Navbar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -25,7 +26,10 @@ const themeLight = createTheme({
 root.render(
   <ThemeProvider theme={themeLight}>
     <React.StrictMode>
-      <App />
+      <div>
+        <NavBar/>
+        <App />
+      </div>
     </React.StrictMode>
   </ThemeProvider>
 );
