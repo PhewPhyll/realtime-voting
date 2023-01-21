@@ -28,25 +28,51 @@ app.post('/add_topic', async (req, res) => {
         await topic.save()
     });
     await res.status(200).send({ message: `Now Added ${topics}` })
-    sendEventToAll({topics , event : 'add'})
+    sendEventToAll({ topics, event: 'add' })
 })
 
 //User Vote
 app.post('/voted', async (req, res) => {
     const { user, id } = req.body
     const topic_selection = await TopicModel.findOne({ _id: id })
+    const all_topics = await TopicModel.find({})
+    let count_vote = 0
+    for (let i = 0; i < all_topics.length; i++) {
+
+        if (all_topics[i].votes.includes(user)) {
+            count_vote += 1
+        }
+
+        if (count_vote >= config.limitVote) {
+            break
+        }
+
+    }
     let status = false
+    
     if (await topic_selection.votes.includes(user)) {
+
         topic_selection.votes = await topic_selection.votes.filter(e => e !== user)
         status = false
+        await topic_selection.save()
+        sendEventToAll({ user, id, status, event: 'vote' })
+        res.status(200).send({ user, id, status: status })
+
     } else {
-        await topic_selection.votes.push(user)
-        status = true
+
+        if (count_vote >= config.limitVote) {
+            res.status(200).send({message : "Vote to limit."})
+        } else {
+
+            await topic_selection.votes.push(user)
+            status = true
+            await topic_selection.save()
+            sendEventToAll({ user, id, status, event: 'vote' })
+            res.status(200).send({ user, id, status: status })
+        }
+
     }
 
-    await topic_selection.save()
-    sendEventToAll({ user, id, status: status, event : 'vote' })
-    res.status(200).send({ user, id, status: status })
 })
 
 //Get Topics
@@ -90,6 +116,7 @@ app.get('/', (req, res) => {
         clients = clients.filter(client => client.id !== clientId);
     });
 })
+
 
 app.listen(config.port, () => {
     console.log("Server is Running...")
