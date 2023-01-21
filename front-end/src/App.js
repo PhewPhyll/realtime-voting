@@ -3,16 +3,19 @@ import TopicCard from './components/TopicCard/TopicCard';
 import './components/Scrollbar/Scrollbar.css'
 import Searchbar from './components/Searchbar/Searchbar.js';
 import { Container, Grid } from '@mui/material';
-
-
+import { useState } from 'react'
 
 function App() {
+  const handleChange = (value) => {
+    console.log(value);
+};
+  const[searchTerm, setSearchTerm] =useState('')
   const data = [
-    {id: 1, name: "หัวข้อที่ 1"},
-    {id: 2, name: "หัวข้อที่ 2"},
-    {id: 3, name: "หัวข้อที่ 3"},
-    {id: 4, name: "หัวข้อที่ 4"},
-    {id: 5, name: "หัวข้อที่ 5"},
+    {id: 1, name: "Topic 1"},
+    {id: 2, name: "Barcamp"},
+    {id: 3, name: "Fast codeing"},
+    {id: 4, name: "มื้อเย็น"},
+    {id: 5, name: "Boardgame"},
     {id: 6, name: "หัวข้อที่ 6"},
     {id: 7, name: "หัวข้อที่ 7"},
     {id: 8, name: "หัวข้อที่ 8"},
@@ -53,9 +56,20 @@ function App() {
 ]
   return (
     <Container maxWidth='lg' sx={{ mt: '10rem', mb: '2rem'}}>
-      {/* <Searchbar/> */}
+      <Searchbar 
+                    placeholder="Search..."
+                    onChange={(event) => {setSearchTerm(event.target.value)}}
+                    searchBarWidth='720px'
+                />
       <Grid container spacing={1} columns={12}>
-        {data.map(e => 
+        {data.filter((val)=>{
+                if (searchTerm == ""){
+                return val
+                }
+                else if(val.name.toLowerCase().includes(searchTerm.toLowerCase())){
+                return val
+                }
+            }).map(e => 
           <Grid item xs={12} lg={6} key={e.id}>
             <TopicCard data={e}/>
           </Grid>)}
