@@ -8,7 +8,7 @@ function CardTopic({ Topic }) {
     return (
         <Card>
             <CardContent>
-                <Typography variant="h5" component="div">
+                <Typography variant="h5" component="div" align='center' >
                     {Topic}
                 </Typography>
             </CardContent>
