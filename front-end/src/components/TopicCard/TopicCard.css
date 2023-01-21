@@ -1,0 +1,30 @@
+.checkbox input {
+    position: relative;
+}
+
+.checkbox input::before {
+    position: absolute;
+    content: "";
+    height: 40px;
+    width: 40px;
+    background-color: #97e2ee;
+    border: 1px solid #97e2ee;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: 0.3s all ease;
+}
+
+.checkbox input:checked::before {
+    background-color: #2fcfe8;
+    border: 1px solid #2fcfe8;
+}
+
+.checkbox input:checked::after {
+    position: absolute;
+    content: '\f00c';
+    font-family: "FontAwesome";
+    color: #fff;
+}

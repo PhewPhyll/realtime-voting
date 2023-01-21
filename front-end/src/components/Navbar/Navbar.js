@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import barcampLogo from '../../image/barcampLogo.png';
 import './Navbar.css';
 
-function ResponsiveAppBar() {
+function WebBar() {
   return (
     <AppBar position="static" style={{ background: "#000000"}}>
       <Container maxWidth="xl">
@@ -19,4 +19,4 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
-export default ResponsiveAppBar;
+export default WebBar;
