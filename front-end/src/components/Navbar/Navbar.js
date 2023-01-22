@@ -12,10 +12,10 @@ function NavBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Button href='/'>
-            <img style={{ width: "100%", height: 50}} src={barcampLogo} alt="BarcampLogo" href="/"  sx={{ display: { xs: 'none', md: 'flex' }}}/>
+            <img style={{ width: "100%", height: 50 }} src={barcampLogo} alt="BarcampLogo" href="/" sx={{ display: { xs: 'none', md: 'flex' } }} />
           </Button>
-          <Typography>
-              Realtime Voting
+          <Typography fontWeight='bold' variant='h7'>
+            Realtime Voting
           </Typography>
         </Toolbar>
       </Container>
