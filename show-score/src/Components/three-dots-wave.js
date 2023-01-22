@@ -19,11 +19,13 @@ const LoadingContainer = {
 
 const ContainerVariants = {
     initial: {
+        scale : 0,
         transition: {
             staggerChildren: 0.2
         }
     },
     animate: {
+        scale : 1,
         transition: {
             staggerChildren: 0.2
         }
@@ -46,12 +48,10 @@ export default function ThreeDotsWave() {
         <div
 
             style={{
-                paddingTop: "5rem",
                 width: "100%",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                paddingBottom: "3rem"
             }}
         >
             <motion.div
@@ -66,21 +66,21 @@ export default function ThreeDotsWave() {
                     style={LoadingDot}
                     variants={DotVariants}
                     // transition={DotTransition}
-                    transition={{ duration: 1, repeat: Infinity }}
+                    transition={{ duration: 1, repeat: Infinity , repeatType : 'mirror'  }}
 
                 />
                 <motion.span
                     style={LoadingDot}
                     variants={DotVariants}
                     // transition={DotTransition}
-                    transition={{ duration: 1, repeat: Infinity }}
+                    transition={{ duration: 1, repeat: Infinity , repeatType : 'mirror' }}
 
                 />
                 <motion.span
                     style={LoadingDot}
                     variants={DotVariants}
                     // transition={DotTransition}
-                    transition={{ duration: 1, repeat: Infinity }}
+                    transition={{ duration: 1, repeat: Infinity , repeatType : 'mirror' }}
 
                 />
 

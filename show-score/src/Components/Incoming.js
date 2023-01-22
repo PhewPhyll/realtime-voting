@@ -1,7 +1,7 @@
 
 
 // import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion'
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AnimatedText from "./AnimatedText";
 import "./styles.css";
 import { motion } from 'framer-motion'
@@ -17,7 +17,7 @@ export default function Incoming() {
     const container = {
         visible: {
             transition: {
-                staggerChildren: 0.025
+                staggerChildren: 0.05
             }
         }
     };
@@ -30,16 +30,25 @@ export default function Incoming() {
         }, 600);
     };
 
+    useEffect(() => {
+
+        let loop  = setInterval(() => {
+            handleReplay()
+        }, 5000);
+
+        return () => clearInterval(loop)
+
+    },[])
+
 
     return (
         <motion.div
-            className="App"
             initial="hidden"
             // animate="visible"
             animate={replay ? "visible" : "hidden"}
             variants={container}
         >
-            <div className="container">
+            <div>
                 {placeholderText.map((item, index) => {
                     return <AnimatedText {...item} key={index} />;
                 })}

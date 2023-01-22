@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 
 function CardTopic({ Topic }) {
     return (
-        <Card>
+        <Card elevation={5}>
             <CardContent>
                 <Typography variant="h5" component="div" align='center' >
                     {Topic}
