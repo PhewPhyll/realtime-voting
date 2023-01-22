@@ -5,6 +5,10 @@ import Container from '@mui/material/Container';
 import { useEffect, useState } from 'react';
 import { Grid } from '@mui/material';
 import { motion } from 'framer-motion'
+import Loading from './Components/Loading';
+import Incoming from './Components/Incoming';
+// import { animate, AnimatePresence, motion } from 'framer-motion/dist/framer-motion'
+
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1)
@@ -15,7 +19,7 @@ function App() {
     let current_page = 1
     let time_counting = 1
     let wait_until = 6
-  
+
     let loop = setInterval(() => {
       if (time_counting < topics.length) {
         if (time_counting % wait_until === 0) {
@@ -39,8 +43,61 @@ function App() {
   }, [topics.length])
 
   const topicsPerPage = 6
+
+  let order = 0;
+
+  const [items] = useState([
+    { id: 1, name: 'Javascipt Programming Language' },
+    { id: 2, name: 'Programming Language' },
+    { id: 3, name: 'ทฤษฎี123456789' },
+  ]);
+
+  const [id, idTopic] = useState(order)
+  // const [load] = useState(0)
+  let loading;
+
+
+  useEffect(() => {
+    let i = 0;
+    let j = 0;
+
+
+    let loop = setInterval(() => {
+      if (i < items.length - order) {
+        // i++
+        i++
+        j = 0;
+        idTopic(i)
+      }
+      else {
+        j = 1;
+        idTopic(0)
+      }
+
+
+    }, 3000)
+    order = i;
+
+    return () => clearInterval(loop)
+
+  }, [items.length - order])
+
+  if (id == 0) {
+    loading = <Loading />
+  }
+  else {
+
+  }
+
   return (
+
+
     <Container maxWidth="xl">
+      <Incoming />
+      {loading}
+      <h2>
+        {items && items.filter((item) => item.id === id).map((item) => item.name)}
+      </h2>
       <Grid container rowSpacing={2} columns={18} spacing={1} columnSpacing={1} alignItems="flex-end">
 
         {topics.slice(topicsPerPage * (currentPage - 1), topicsPerPage * currentPage).map((e, i) =>
@@ -56,7 +113,7 @@ function App() {
             >
               <CardTopic Topic={e} />
             </motion.div>
-            
+
           </Grid>
         )}
 

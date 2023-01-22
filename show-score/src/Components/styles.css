@@ -1,0 +1,28 @@
+html,
+
+
+.App {
+    text-align: center;
+
+}
+
+.container {
+    padding: 20px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #52cfe3;
+    /* color: #31383E; */
+    font-size: 40px;
+    font-weight: 700;
+    margin-top: 40px;
+    margin-bottom: 0px;
+    /* font: optional; */
+
+}
+
+
+.word-wrapper {
+    white-space: nowrap;
+}
