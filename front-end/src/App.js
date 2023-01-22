@@ -1,7 +1,9 @@
 import * as React from 'react';
+
 import TopicCard from './components/TopicCard/TopicCard';
-import './components/Scrollbar/Scrollbar.css'
 import Searchbar from './components/Searchbar/Searchbar.js';
+import './components/Scrollbar/Scrollbar.css'
+
 import { Container, Grid } from '@mui/material';
 import { useState } from 'react'
 
@@ -55,13 +57,13 @@ function App() {
     {id: 42, name: "หัวข้อที่ 42"},
 ]
   return (
-    <Container maxWidth='lg' sx={{ mt: '10rem', mb: '2rem'}}>
+    <Container maxWidth='lg' sx={{ mt: '4rem', mb: '2rem'}}>
       <Searchbar 
                     placeholder="Search..."
                     onChange={(event) => {setSearchTerm(event.target.value)}}
-                    searchBarWidth='720px'
+                    searchBarWidth='80%'
                 />
-      <Grid container spacing={1} columns={12}>
+      <Grid container spacing={3} columns={12}>
         {data.filter((val)=>{
                 if (searchTerm == ""){
                 return val
