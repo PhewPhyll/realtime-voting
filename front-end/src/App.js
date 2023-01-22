@@ -5,7 +5,8 @@ import Searchbar from './components/Searchbar/Searchbar.js';
 import './components/Scrollbar/Scrollbar.css'
 
 import { Box, Container, Grid } from '@mui/material';
-import { useState } from 'react'
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 function App() {
 
@@ -86,7 +87,7 @@ function App() {
   return (
     <Box>
       <Box sx={{
-        zIndex: 1,
+        zIndex: 200,
         backgroundColor: '#fff',
         padding: '1rem',
         position: 'sticky',
@@ -101,12 +102,17 @@ function App() {
         </Container>
       </Box>
       <Container maxWidth='lg' sx={{ mt: '1rem', mb: '2rem' }}>
-        <Grid container spacing={2} columns={12}>
-          {data.filter(search_filter).map(e =>
-            <Grid item xs={12} lg={6} key={e._id}>
-              <TopicCard data={e} callback={callback} />
-            </Grid>)}
-        </Grid>
+        <AnimatePresence>
+          <Grid container spacing={2} columns={12}>
+            {data.filter(search_filter).map((e, i) =>
+              <Grid item xs={12} lg={6} key={e._id} sx={{ zIndex: data.length - i }}>
+                <motion.div key={e._id} layout initial={{opacity:0}} animate={{opacity:1}} transition={{duration:0.5}}>
+                  <TopicCard data={e} callback={callback} />
+                </motion.div>
+              </Grid>
+            )}
+          </Grid>
+        </AnimatePresence>
       </Container>
     </Box>
 
@@ -114,3 +120,5 @@ function App() {
 }
 
 export default App;
+
+
