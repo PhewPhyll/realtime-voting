@@ -1,29 +1,27 @@
 import React from 'react'
-import "./Searchbar.css"
-import Input from '@mui/material/Input';
-import SearchIcon from '@mui/icons-material/Search';
 import Box from '@mui/material/Box';
+import { InputAdornment, TextField } from '@mui/material';
 
-const Searchbar = ({ placeholder, onChange, searchBarWidth }) =>{
+//Icon
+import SearchIcon from '@mui/icons-material/Search';
+
+const Searchbar = ({ placeholder, onChange }) => {
     return (
-        
-        <div className='App'>
-        <Box sx={{ display: 'flex', 
-                   alignItems: 'center' , 
-                   borderRadius: '5rem', 
-                   backgroundColor:'#C8F1F7', 
-                   mb: '4rem'}}>
-                <SearchIcon sx={{ marginRight: '10px', ml: '20px', color: 'rgba(0, 0, 0, 0.7)'}} />
-                <Input
-                    placeholder={placeholder}
-                    onChange={onChange}
-                    sx={{width: searchBarWidth, 
-                        color: 'rgba(0, 0, 0, 0.5)', 
-                        fontSize: '1.5rem'}}
-                    disableUnderline
-                />
+        <Box>
+            <TextField
+                fullWidth
+                color='secondary'
+                placeholder={placeholder}
+                onChange={onChange}
+                InputProps={{
+                    startAdornment: (
+                        <InputAdornment position="start">
+                            <SearchIcon />
+                        </InputAdornment>
+                    ),
+                }}
+            />
         </Box>
-        </div>
     )
 }
 
