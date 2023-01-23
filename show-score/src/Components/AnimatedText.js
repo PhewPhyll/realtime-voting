@@ -1,10 +1,11 @@
 import React from "react";
 // import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion'
 import { motion } from 'framer-motion'
+import { Typography } from "@mui/material";
 // Word wrapper
 const Wrapper = (props) => {
     // We'll do this to prevent wrapping of words using CSS
-    return <span className="word-wrapper">{props.children}</span>;
+    return <Typography color='secondary' variant="h3" className="word-wrapper">{props.children}</Typography>;
 };
 
 // Map API "type" vaules to JSX tag names

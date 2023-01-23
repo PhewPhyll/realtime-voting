@@ -1,4 +1,3 @@
-import './App.css';
 import CardTopic from './Components/CardTopic';
 import Container from '@mui/material/Container';
 import { useEffect, useState } from 'react';
@@ -80,7 +79,7 @@ function App() {
         height: '90vh',
         gap: '1rem'
       }}>
-        <Box>
+        <Box sx={{ width : '100%', textAlign : 'center' }}>
           <Incoming />
         </Box>
         <Card elevation={5} sx={{
