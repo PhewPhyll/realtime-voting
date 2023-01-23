@@ -33,6 +33,7 @@ app.post('/add_topic', async (req, res) => {
 
 //User Vote
 app.post('/voted', async (req, res) => {
+
     const { user, id } = req.body
     const topic_selection = await TopicModel.findOne({ _id: id })
     const all_topics = await TopicModel.find({})
@@ -80,17 +81,19 @@ app.get('/topics', async (req, res) => {
     const user = req.query.user
     const topics = await TopicModel.find({})
     const topics_to_send = []
-    for (let i = 0; i < topics.length; i++) {
-        let userInVote = topics[i].votes.includes(user)
-        topics_to_send.push({
-            _id: topics[i]._id,
-            title: topics[i].title,
-            votes: topics[i].votes.length,
-            status: userInVote
-        })
-    }
-
     const Istime = await mongoose.connection.db.collection('console').find().toArray()
+
+    if(Istime[0].vote){
+        for (let i = 0; i < topics.length; i++) {
+            let userInVote = topics[i].votes.includes(user)
+            topics_to_send.push({
+                _id: topics[i]._id,
+                title: topics[i].title,
+                votes: topics[i].votes.length,
+                status: userInVote
+            })
+        }
+    }
 
     res.status(200).send({topics_to_send , Istime : Istime[0].vote })
 })

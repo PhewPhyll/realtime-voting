@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import TopicCard from './components/TopicCard/TopicCard';
 import Searchbar from './components/Searchbar/Searchbar.js';
-import { Box, Container, Grid } from '@mui/material';
+import { Box, Container, Grid, Typography } from '@mui/material';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import backend from './Services/backend'
@@ -9,6 +9,7 @@ import backend from './Services/backend'
 //Style
 import './components/Scrollbar/Scrollbar.css'
 import AlertBox from './components/AlertBox/AlertBox';
+import Decrypt from './Services/Decrypt';
 
 const userContext = React.createContext()
 
@@ -16,21 +17,37 @@ function App() {
 
   const [data, setData] = useState([])
   const [alert, setAlert] = useState(false)
-  const [user] = useState("abc")
+  const [centent , setContent] = useState("")
+  const [user, setUser] = useState("abc")
 
   //Fetch Topics
   useEffect(() => {
-    backend.get(`/topics/?user=${user}`).then(res => {
 
-      if (res.data.Istime) {
-        let me_vote = res.data.topics_to_send.filter(e => e.status)
-        let not_vote = res.data.topics_to_send.filter(e => !e.status).sort(() => 0.5 - Math.random())
-        setData(me_vote.concat(not_vote))
-      } else {
-        setAlert(true)
-      }
+    let decrypt_user = Decrypt(window.location.search.replace('?uid=' , ''))
 
-    })
+    if (!!decrypt_user) {
+      setUser(decrypt_user)
+      backend.get(`/topics/?user=${decrypt_user}`).then(res => {
+        if (res.data.Istime) {
+          let me_vote = res.data.topics_to_send.filter(e => e.status)
+          let not_vote = res.data.topics_to_send.filter(e => !e.status).sort(() => 0.5 - Math.random())
+          setData(me_vote.concat(not_vote))
+        } else {
+
+          setContent("ขณะนี้ยังไม่เปิดให้โหวต กรุณารอให้ถึงเวลาแล้วเข้ามาอีกครั้ง")
+          setAlert(true)
+
+        }
+
+      })
+    }else{
+
+      setContent("รูปแบบ QRcode หรือ URL ไม่ถูกต้อง กรุณาติดต่อเจ้าหน้าที่")
+      setAlert(true)
+
+    }
+
+
   }, [user])
 
   const [searchTerm, setSearchTerm] = useState('')
@@ -74,12 +91,18 @@ function App() {
         mt: '7rem',
         top: '3.7rem'
       }}>
-        <Container>
-          <Searchbar
-            placeholder="Search Topic"
-            onChange={(event) => { setSearchTerm(event.target.value) }}
-          />
-        </Container>
+        {alert ? <Typography sx={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: "translate(-50% ,-50%)"
+        }} variant='body1'>It's not time to vote yet.</Typography> :
+          <Container>
+            <Searchbar
+              placeholder="Search Topic"
+              onChange={(event) => { setSearchTerm(event.target.value) }}
+            />
+          </Container>}
       </Box>
       <Container maxWidth='lg' sx={{ mt: '1rem', mb: '2rem' }}>
         <AnimatePresence>
@@ -94,7 +117,7 @@ function App() {
           </Grid>
         </AnimatePresence>
 
-        <AlertBox content='ขณะนี้ยังไม่เปิดให้โหวต กรุณารอให้ถึงเวลาแล้วเข้ามาอีกครั้ง' alert={alert} />
+        <AlertBox content={centent} alert={alert} callbackClose={() => { }} />
       </Container>
     </userContext.Provider>
 
