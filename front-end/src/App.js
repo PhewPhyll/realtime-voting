@@ -8,22 +8,30 @@ import backend from './Services/backend'
 
 //Style
 import './components/Scrollbar/Scrollbar.css'
+import AlertBox from './components/AlertBox/AlertBox';
 
 const userContext = React.createContext()
 
 function App() {
 
   const [data, setData] = useState([])
+  const [alert, setAlert] = useState(false)
   const [user] = useState("abc")
 
   //Fetch Topics
   useEffect(() => {
     backend.get(`/topics/?user=${user}`).then(res => {
-      let me_vote = res.data.filter(e => e.status)
-      let not_vote = res.data.filter(e => !e.status).sort(() => 0.5 - Math.random())
-      setData(me_vote.concat(not_vote))
+
+      if (res.data.Istime) {
+        let me_vote = res.data.topics_to_send.filter(e => e.status)
+        let not_vote = res.data.topics_to_send.filter(e => !e.status).sort(() => 0.5 - Math.random())
+        setData(me_vote.concat(not_vote))
+      } else {
+        setAlert(true)
+      }
+
     })
-  },[user])
+  }, [user])
 
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -78,20 +86,22 @@ function App() {
           <Grid container spacing={2} columns={12}>
             {data.filter(search_filter).map((e, i) =>
               <Grid item xs={12} lg={6} key={e._id} sx={{ zIndex: data.length - i }}>
-                <motion.div key={e._id} layout initial={{opacity:0}} animate={{opacity:1}} transition={{duration:0.5}}>
+                <motion.div key={e._id} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
                   <TopicCard data={e} callback={callback} />
                 </motion.div>
               </Grid>
             )}
           </Grid>
         </AnimatePresence>
+
+        <AlertBox content='ขณะนี้ยังไม่เปิดให้โหวต กรุณารอให้ถึงเวลาแล้วเข้ามาอีกครั้ง' alert={alert} />
       </Container>
     </userContext.Provider>
 
   );
 }
 
-export {userContext}
+export { userContext }
 export default App;
 
 

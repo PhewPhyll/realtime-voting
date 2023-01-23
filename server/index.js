@@ -88,9 +88,11 @@ app.get('/topics', async (req, res) => {
             votes: topics[i].votes.length,
             status: userInVote
         })
-
     }
-    res.status(200).send(topics_to_send)
+
+    const Istime = await mongoose.connection.db.collection('console').find().toArray()
+
+    res.status(200).send({topics_to_send , Istime : Istime[0].vote })
 })
 
 app.get('/', (req, res) => {

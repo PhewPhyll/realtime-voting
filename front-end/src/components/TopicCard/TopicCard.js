@@ -8,9 +8,11 @@ import CircleIcon from '@mui/icons-material/Circle';
 import { Box } from '@mui/material'
 import backend from '../../Services/backend';
 import { userContext } from '../../App';
+import AlertBox from '../AlertBox/AlertBox';
 
 export default function TopicCard({ data , callback }) {
 
+    const [alert , setAlert] = useState(false)
     const [check , setCheck] = useState(data.status);
     const user = useContext(userContext)
 
@@ -20,10 +22,14 @@ export default function TopicCard({ data , callback }) {
                 setCheck(!check)
                 callback(data)
             }else{
-                alert(res.data.message)
+                setAlert(true)
             }
         })
        
+    }
+
+    const callbackClose = () => {
+        setAlert(false)
     }
 
     return (
@@ -38,6 +44,7 @@ export default function TopicCard({ data , callback }) {
                     </Box>
                 </CardContent>
             </CardActionArea>
+            <AlertBox content="ขณะนี้คุณได้โหวตครบจำนวน 10 ครั้งแล้ว หากต้องการเปลี่ยนหัวข้อ กรุณากดยกเลิกโหวตบางหัวข้อ" alert={alert} callbackClose={callbackClose} />
         </Card>
     );
 }
