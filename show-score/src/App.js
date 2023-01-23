@@ -6,6 +6,10 @@ import { motion } from 'framer-motion'
 import Loading from './Components/Loading';
 import Incoming from './Components/Incoming';
 import IncommingNow from './Components/IncommingNow';
+import es from './Services/EventSend';
+import backend from './Services/backend';
+import ReconnectingEventSource from 'reconnecting-eventsource';
+import config from './config';
 
 
 function App() {
@@ -45,18 +49,23 @@ function App() {
 
   useEffect(() => {
 
-    let mock = ["engineering", "disasters", "apes", "Red Cross", "agriculture", "potatoes", "coffin", "toads", "dentistry", "pipe organs", "World War 1", "Boy Scouts"]
-    let index = 0;
-    let loop = setInterval(() => {
-      setIncomingLst(pre => [...pre, mock[index]])
-      index += 1
-      if (index > mock.length - 1) {
-        clearInterval(loop)
-        index = 0;
-      }
-    }, 4000)
+    backend.get('/topics/?user=admin').then(res => {
+      let topics = res.data.topics_to_send
+      setTopics(topics.map(e => e.title))
+    })
 
-    return () => clearInterval(loop)
+    const es = new ReconnectingEventSource(config.apiUrlPrefix);
+
+    es.onmessage = (event) => {
+
+      let res = JSON.parse(event.data)
+
+      if(res.event === "add"){
+        setIncomingLst(pre => [...pre, res.topics.map(e => e.title)])
+      }
+    }
+
+    return () => es.close()
 
   }, [])
 
@@ -79,7 +88,7 @@ function App() {
         height: '90vh',
         gap: '1rem'
       }}>
-        <Box sx={{ width : '100%', textAlign : 'center' }}>
+        <Box sx={{ width : '100%', textAlign : 'center' , mt : '2rem' }}>
           <Incoming />
         </Box>
         <Card elevation={5} sx={{
@@ -93,7 +102,7 @@ function App() {
           {inComingLst.length === 0 ? <Loading /> :
             <Grid container columns={12} spacing={1} alignItems="center" justifyContent='center'>
               {inComingLst.map(e =>
-                <Grid item xl={4}>
+                <Grid key={e} item xl={4}>
                   <motion.div key={e} layout>
                     <IncommingNow key={e} title={e} callback={callback_when_end_incomming} />
                   </motion.div>

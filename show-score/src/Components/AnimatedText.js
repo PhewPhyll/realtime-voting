@@ -11,7 +11,7 @@ const Wrapper = (props) => {
 // Map API "type" vaules to JSX tag names
 const tagMap = {
 
-    heading1: "h1"
+    heading1: "div"
 
 };
 const AnimatedCharacters = (props) => {

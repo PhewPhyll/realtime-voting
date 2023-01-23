@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, CardContent, Container, Grid, Typography } from '@mui/material'
 import CardTop from './CardTop'
 import { AnimatePresence, motion } from 'framer-motion'
 import CardRange from './CardRange'
+import ReconnectingEventSource from 'reconnecting-eventsource'
+import config from '../../config'
 
 function Votepage() {
 
@@ -62,6 +64,21 @@ function Votepage() {
   ])
 
   const [top3, setTop3] = useState(allTopics.sort((a, b) => b.votes - a.votes).slice(0,3))
+
+  useEffect(() => {
+
+    const es = new ReconnectingEventSource(config.apiUrlPrefix);
+
+    es.onmessage = (event) => {
+
+      let res = JSON.parse(event.data)
+      console.log(res)
+
+    }
+
+    return () => es.close()
+
+  }, [])
 
   return (
     <Container maxWidth="xl" sx={{ mt: '3rem' }}>
