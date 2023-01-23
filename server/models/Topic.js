@@ -4,6 +4,7 @@ const collection = "Topics"
 
 const TopicModel = new Schema({
     title : String,
+    speaker : String,
     votes : [String]
 })
 

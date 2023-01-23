@@ -24,10 +24,10 @@ const sendEventToAll = (data) => {
 app.post('/add_topic', async (req, res) => {
     const { topics } = await req.body
     await topics.forEach(async element => {
-        const topic = await new TopicModel({ title: element })
+        const topic = await new TopicModel({ title: element.title , speaker : element.speaker })
         await topic.save()
     });
-    await res.status(200).send({ message: `Now Added ${topics}` })
+    await res.status(200).send({ message: `Now Added ${topics.map(e => e.title)}` })
     sendEventToAll({ topics, event: 'add' })
 })
 
