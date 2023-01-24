@@ -48,7 +48,7 @@ function App() {
 
   useEffect(() => {
 
-    backend.get('/topics/?user=admin').then(res => {
+    backend.get('/topics_admin').then(res => {
       let topics = res.data.topics_to_send
       setTopics(topics.map(e => e.title))
     })

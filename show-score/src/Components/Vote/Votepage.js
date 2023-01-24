@@ -12,7 +12,7 @@ function Votepage() {
   const [allTopics, setAllTopics] = useState([])
 
   useEffect(() => {
-    backend.get('/topics/?user=admin').then(res => {
+    backend.get('/topics_admin').then(res => {
       setAllTopics(res.data.topics_to_send)
     })
   }, [])
@@ -22,21 +22,15 @@ function Votepage() {
 
     const es = new ReconnectingEventSource(config.apiUrlPrefix);
 
-    es.onmessage = (event) => {
+    es.onmessage = async (event) => {
 
-      let res = JSON.parse(event.data)
+      let res = await JSON.parse(event.data)
 
       if (res.event === 'vote') {
 
-        console.log(res)
-
         setAllTopics(pre => pre.map(e => {
           if (e._id === res.id) {
-            if (res.status) {
-              e.votes += 1
-            } else {
-              e.votes -= 1
-            }
+            e.votes = res.votes
           }
 
           return e
@@ -48,13 +42,13 @@ function Votepage() {
 
     return () => es.close()
 
-  }, [])
+  }, [allTopics])
 
   return (
     <Container maxWidth="xl" sx={{ mt: '3rem' }}>
       <Grid container columns={12} spacing={2} sx={{ height: '90vh' }}>
         <Grid item xl={6}>
-          <Card elevation={5} sx={{ height: '100%' }}>
+          <Card elevation={5} sx={{ height: '100%' , borderRadius : '1rem' }}>
             <CardContent sx={{ height: '100%' }}>
               <Typography sx={{ textAlign: "center" }} fontWeight='bold' color='secondary' variant='h2'>TOP 10</Typography>
               <Grid
@@ -62,6 +56,8 @@ function Votepage() {
                 container
                 columns={12}
                 spacing={2}
+                justifyContent ='flex-start'
+                alignContent='start'
               >
                 <AnimatePresence>
                   {allTopics.sort((a, b) => b.votes - a.votes).filter(e => e.votes >= 3).slice(0, 10).map((e, i) =>
@@ -71,7 +67,7 @@ function Votepage() {
                         layout
                         initial={{ translateY: 500 }}
                         animate={{ translateY: 0 }}
-                        exit={{ opacity : 0 , scale : 0 }}
+                        exit={{ translateY: 1000 , opacity: 0, scale: 0 }}
                         transition={{ delay: 0.1 * i }}
                       >
                         <CardTop index={i} data={e} />
@@ -83,7 +79,7 @@ function Votepage() {
           </Card>
         </Grid>
         <Grid item xl={6}>
-          <Card elevation={5} sx={{ height: '100%' }}>
+          <Card elevation={5} sx={{ height: '100%' , borderRadius : '1rem' }}>
             <CardContent>
               <Typography sx={{ textAlign: "center" }} fontWeight='bold' color='secondary' variant='h4'>Topics</Typography>
               <Grid sx={{ height: '100%', mt: '1rem' }}
@@ -92,7 +88,7 @@ function Votepage() {
                 spacing={1}
                 alignContent="center">
                 <AnimatePresence>
-                  {allTopics.sort((a, b) => b.votes - a.votes).filter(e => e.votes >= 3).map((e, i) =>
+                  {allTopics.sort((a, b) => b.votes - a.votes).filter(e => e.votes >= 1).map((e, i) =>
                     <Grid key={e._id} item xl={6}>
                       <motion.div
                         key={e._id}

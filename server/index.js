@@ -56,7 +56,7 @@ app.post('/voted', async (req, res) => {
         topic_selection.votes = await topic_selection.votes.filter(e => e !== user)
         status = false
         await topic_selection.save()
-        sendEventToAll({ user, id, status, event: 'vote' })
+        sendEventToAll({ user, id, votes : topic_selection.votes.length , event: 'vote' })
         res.status(200).send({ user, id, status: status })
 
     } else {
@@ -68,7 +68,7 @@ app.post('/voted', async (req, res) => {
             await topic_selection.votes.push(user)
             status = true
             await topic_selection.save()
-            sendEventToAll({ user, id, status, event: 'vote' })
+            sendEventToAll({ user, id, votes : topic_selection.votes.length, event: 'vote' })
             res.status(200).send({ user, id, status: status })
         }
 
@@ -98,6 +98,25 @@ app.get('/topics', async (req, res) => {
     }
 
     res.status(200).send({topics_to_send , Istime : Istime[0].vote })
+})
+
+//Get Topics admin
+app.get('/topics_admin', async (req, res) => {
+
+    const topics = await TopicModel.find({})
+    const topics_to_send = []
+
+        for (let i = 0; i < topics.length; i++) {
+            topics_to_send.push({
+                _id: topics[i]._id,
+                title: topics[i].title,
+                votes: topics[i].votes.length,
+                speaker : topics[i].speaker,
+                long_duration : topics[i].long_duration,
+            })
+        }
+
+    res.status(200).send({ topics_to_send : topics_to_send })
 })
 
 app.get('/', (req, res) => {

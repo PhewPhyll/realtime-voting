@@ -16,8 +16,8 @@ function CardTop({ data , index }) {
             alignItems : 'center',
             height : '75%'
      }}>
-            <Typography noWrap textOverflow='ellipsis' sx={{ width : '20rem' }} variant='h5'>{index + 1}.) {data.title}</Typography>
-            <Typography sx={{
+            <Typography fontWeight='bold' noWrap textOverflow='ellipsis' sx={{ width : '20rem' }} variant='h5'>{data.title}</Typography>
+            <Typography fontWeight='bold' sx={{
                 backgroundColor : '#fff',
                 borderRadius : '100%',
                 width : '1rem',
