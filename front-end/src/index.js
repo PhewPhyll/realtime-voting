@@ -8,6 +8,23 @@ import NavBar from './components/Navbar/Navbar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+const theme = false;
+
+const themeDark = createTheme({
+  palette: {
+    mode : 'dark',
+    primary: {
+      main: '#fff'
+    },
+    secondary: {
+      main : '#52cfe3'
+    }
+  },
+  typography: {
+    fontFamily: 'Pridi, serif'
+  },
+})
+
 const themeLight = createTheme({
   palette: {
     mode: 'light',
@@ -24,7 +41,7 @@ const themeLight = createTheme({
 })
 
 root.render(
-  <ThemeProvider theme={themeLight}>
+  <ThemeProvider theme={ !theme ? themeLight : themeDark}>
     <React.StrictMode>
       <div>
         <NavBar/>
