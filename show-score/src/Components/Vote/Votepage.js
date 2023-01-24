@@ -5,65 +5,20 @@ import { AnimatePresence, motion } from 'framer-motion'
 import CardRange from './CardRange'
 import ReconnectingEventSource from 'reconnecting-eventsource'
 import config from '../../config'
+import backend from '../../Services/backend'
 
 function Votepage() {
 
-  const [allTopics, setAllTopics] = useState([
-    {
-      title: "Fast programming",
-      votes: 50
-    },
-    {
-      title: "ChatGPT",
-      votes: 45
-    },
-    {
-      title: "Nodejs",
-      votes: 38
-    },
-    {
-      title: "React",
-      votes: 34
-    },
-    {
-      title: "javascript",
-      votes: 29
-    },
-    {
-      title: "Mongo",
-      votes: 27
-    },
-    {
-      title: "SQL",
-      votes: 25
-    },
-    {
-      title: "OpenAI",
-      votes: 20
-    },
-    {
-      title: "Google",
-      votes: 29
-    },
-    {
-      title: "Youtube",
-      votes: 25
-    },
-    {
-      title: "Computer",
-      votes: 16
-    },
-    {
-      title: "memory",
-      votes: 16
-    },
-    {
-      title: "Nvidia",
-      votes: 12
-    }
-  ])
+  const [allTopics, setAllTopics] = useState([])
+  const [top3, setTop3] = useState([])
 
-  const [top3, setTop3] = useState(allTopics.sort((a, b) => b.votes - a.votes).slice(0,3))
+  useEffect(() => {
+    backend.get('/topics/?user=admin').then(res => {
+      setAllTopics(res.data.topics_to_send)
+      setTop3(res.data.topics_to_send.sort((a, b) => b.votes - a.votes).slice(0,3))
+    })
+  },[])
+
 
   useEffect(() => {
 
@@ -96,9 +51,9 @@ function Votepage() {
               >
                 <AnimatePresence>
                   {top3.map((e, i) =>
-                    <Grid item xl={12}>
+                    <Grid item xl={12} key={e._id}>
                       <motion.div
-                        key={e.title}
+                        key={e._id}
                         layout
                         initial={{ translateY: 500 }}
                         animate={{ translateY: 0 }}
@@ -125,7 +80,7 @@ function Votepage() {
                   {allTopics.sort((a, b) => b.votes - a.votes).slice(0,12).map((e, i) =>
                     (i > 2) ? <Grid item xl={12}>
                       <motion.div
-                        key={e.title}
+                        key={e._id}
                         layout
                         initial={{ translateY: 500 }}
                         animate={{ translateY: 0 }}
