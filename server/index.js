@@ -90,6 +90,8 @@ app.get('/topics', async (req, res) => {
                 _id: topics[i]._id,
                 title: topics[i].title,
                 votes: topics[i].votes.length,
+                speaker : topics[i].speaker,
+                long_duration : topics[i].long_duration,
                 status: userInVote
             })
         }
