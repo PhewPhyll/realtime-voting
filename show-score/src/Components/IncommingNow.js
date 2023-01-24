@@ -11,7 +11,7 @@ function IncommingNow({ title, callback }) {
         let delay = setTimeout(() => {
             setShow(false)
             callback(title)
-        }, 3000);
+        }, 30000);
 
         return () => clearTimeout(delay)
     }, [])
@@ -32,12 +32,12 @@ function IncommingNow({ title, callback }) {
                             justifyContent : 'center',
                             height : '90%'
                         }}>
-                            <Typography variant='h4'>{title}</Typography>
+                            <Typography noWrap variant='h4'>{title}</Typography>
                         </CardContent>
                         <motion.div
                             initial={{ width: '100%' }}
                             animate={{ width: '0%' }}
-                            transition={{ duration: 3 }}
+                            transition={{ duration: 30 }}
                             style={{
                                 backgroundColor: '#52cfe3',
                                 width: '100%',

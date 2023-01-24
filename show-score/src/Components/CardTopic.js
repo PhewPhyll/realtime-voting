@@ -8,7 +8,7 @@ function CardTopic({ Topic }) {
     return (
         <Card elevation={5}>
             <CardContent>
-                <Typography variant="h5" component="div" align='center' >
+                <Typography noWrap variant="h5" component="div" align='center' >
                     {Topic}
                 </Typography>
             </CardContent>

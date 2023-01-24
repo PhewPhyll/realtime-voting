@@ -10,14 +10,12 @@ import backend from '../../Services/backend'
 function Votepage() {
 
   const [allTopics, setAllTopics] = useState([])
-  const [top3, setTop3] = useState([])
 
   useEffect(() => {
     backend.get('/topics/?user=admin').then(res => {
       setAllTopics(res.data.topics_to_send)
-      setTop3(res.data.topics_to_send.sort((a, b) => b.votes - a.votes).slice(0,3))
     })
-  },[])
+  }, [])
 
 
   useEffect(() => {
@@ -27,7 +25,24 @@ function Votepage() {
     es.onmessage = (event) => {
 
       let res = JSON.parse(event.data)
-      console.log(res)
+
+      if (res.event === 'vote') {
+
+        console.log(res)
+
+        setAllTopics(pre => pre.map(e => {
+          if (e._id === res.id) {
+            if (res.status) {
+              e.votes += 1
+            } else {
+              e.votes -= 1
+            }
+          }
+
+          return e
+        }))
+
+      }
 
     }
 
@@ -41,22 +56,22 @@ function Votepage() {
         <Grid item xl={6}>
           <Card elevation={5} sx={{ height: '100%' }}>
             <CardContent sx={{ height: '100%' }}>
-              <Typography sx={{ textAlign: "center" }} fontWeight='bold' color='secondary' variant='h2'>TOP 3</Typography>
+              <Typography sx={{ textAlign: "center" }} fontWeight='bold' color='secondary' variant='h2'>TOP 10</Typography>
               <Grid
-                sx={{ height: '100%' }}
+                sx={{ height: '100%', mt: '1rem' }}
                 container
                 columns={12}
-                spacing={4}
-                alignContent="center"
+                spacing={2}
               >
                 <AnimatePresence>
-                  {top3.map((e, i) =>
-                    <Grid item xl={12} key={e._id}>
+                  {allTopics.sort((a, b) => b.votes - a.votes).filter(e => e.votes >= 3).slice(0, 10).map((e, i) =>
+                    <Grid item xl={6} key={e._id}>
                       <motion.div
                         key={e._id}
                         layout
                         initial={{ translateY: 500 }}
                         animate={{ translateY: 0 }}
+                        exit={{ opacity : 0 , scale : 0 }}
                         transition={{ delay: 0.1 * i }}
                       >
                         <CardTop index={i} data={e} />
@@ -71,23 +86,23 @@ function Votepage() {
           <Card elevation={5} sx={{ height: '100%' }}>
             <CardContent>
               <Typography sx={{ textAlign: "center" }} fontWeight='bold' color='secondary' variant='h4'>Topics</Typography>
-              <Grid sx={{ height: '100%' , mt : '1rem' }}
+              <Grid sx={{ height: '100%', mt: '1rem' }}
                 container
                 columns={12}
                 spacing={1}
                 alignContent="center">
                 <AnimatePresence>
-                  {allTopics.sort((a, b) => b.votes - a.votes).slice(0,12).map((e, i) =>
-                    (i > 2) ? <Grid item xl={12}>
+                  {allTopics.sort((a, b) => b.votes - a.votes).filter(e => e.votes >= 3).map((e, i) =>
+                    <Grid key={e._id} item xl={6}>
                       <motion.div
                         key={e._id}
                         layout
                         initial={{ translateY: 500 }}
                         animate={{ translateY: 0 }}
                       >
-                        <CardRange maxVote={Math.max(...allTopics.map(e => e.votes))} index={i} data={e} />
+                        <CardRange data={e} />
                       </motion.div>
-                    </Grid> : ""
+                    </Grid>
                   )}
                 </AnimatePresence>
               </Grid>

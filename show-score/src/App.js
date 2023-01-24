@@ -6,7 +6,6 @@ import { motion } from 'framer-motion'
 import Loading from './Components/Loading';
 import Incoming from './Components/Incoming';
 import IncommingNow from './Components/IncommingNow';
-import es from './Services/EventSend';
 import backend from './Services/backend';
 import ReconnectingEventSource from 'reconnecting-eventsource';
 import config from './config';
@@ -61,7 +60,7 @@ function App() {
       let res = JSON.parse(event.data)
 
       if(res.event === "add"){
-        setIncomingLst(pre => [...pre, res.topics.map(e => e.title)])
+        setIncomingLst(pre => pre.concat(res.topics.map(e => e.title)))
       }
     }
 
@@ -101,7 +100,7 @@ function App() {
         }}>
           {inComingLst.length === 0 ? <Loading /> :
             <Grid container columns={12} spacing={1} alignItems="center" justifyContent='center'>
-              {inComingLst.map(e =>
+              {inComingLst.slice(0,1).map(e =>
                 <Grid key={e} item xl={4}>
                   <motion.div key={e} layout>
                     <IncommingNow key={e} title={e} callback={callback_when_end_incomming} />
