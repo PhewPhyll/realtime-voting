@@ -24,7 +24,7 @@ const sendEventToAll = (data) => {
 app.post('/add_topic', async (req, res) => {
     const { topics } = await req.body
     await topics.forEach(async element => {
-        const topic = await new TopicModel({ title: element.title , speaker : element.speaker })
+        const topic = await new TopicModel({ title: element.title , speaker : element.speaker , long_duration : element.long_duration })
         await topic.save()
     });
     await res.status(200).send({ message: `Now Added ${topics.map(e => e.title)}` })
@@ -90,6 +90,8 @@ app.get('/topics', async (req, res) => {
                 _id: topics[i]._id,
                 title: topics[i].title,
                 votes: topics[i].votes.length,
+                speaker : topics[i].speaker,
+                long_duration : topics[i].long_duration,
                 status: userInVote
             })
         }
