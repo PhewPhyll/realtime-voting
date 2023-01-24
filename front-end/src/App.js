@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import TopicCard from './components/TopicCard/TopicCard';
 import Searchbar from './components/Searchbar/Searchbar.js';
+import Footer from './components/Footer/Footer';
+
 import { Box, Container, Grid, Typography } from '@mui/material';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -103,7 +105,7 @@ function App() {
             />
           </Container>}
       </Box>
-      <Container maxWidth='lg' sx={{ mt: '1rem', mb: '2rem' }}>
+      <Container maxWidth='lg' sx={{ mt: '1rem', mb: '5rem' }}>
         <AnimatePresence>
           <Grid container spacing={2} columns={12}>
             {data.filter(search_filter).map((e, i) =>
@@ -118,6 +120,9 @@ function App() {
 
         <AlertBox content={centent} alert={alert} callbackClose={() => { }} />
       </Container>
+      
+      <Footer/>
+
     </userContext.Provider>
 
   );

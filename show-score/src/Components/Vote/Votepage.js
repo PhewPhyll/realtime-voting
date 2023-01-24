@@ -6,6 +6,7 @@ import CardRange from './CardRange'
 import ReconnectingEventSource from 'reconnecting-eventsource'
 import config from '../../config'
 import backend from '../../Services/backend'
+import Wave from '../FooterWave/Wave'
 
 function Votepage() {
 
@@ -106,6 +107,7 @@ function Votepage() {
           </Card>
         </Grid>
       </Grid>
+      <Wave/>
     </Container>
   )
 }
