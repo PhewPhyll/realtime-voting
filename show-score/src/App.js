@@ -3,12 +3,14 @@ import Container from '@mui/material/Container';
 import { useEffect, useState } from 'react';
 import { Box, Card, Grid } from '@mui/material';
 import { motion } from 'framer-motion'
+
 import Loading from './Components/Loading';
 import Incoming from './Components/Incoming';
 import IncommingNow from './Components/IncommingNow';
 import backend from './Services/backend';
 import ReconnectingEventSource from 'reconnecting-eventsource';
 import config from './config';
+import Wave from './Components/FooterWave/Wave';
 
 
 function App() {
@@ -147,6 +149,7 @@ function App() {
           </Grid>
         </Card>
       </Box>
+      <Wave/>
     </Container>
   );
 }

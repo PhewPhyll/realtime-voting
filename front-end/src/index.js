@@ -8,7 +8,7 @@ import NavBar from './components/Navbar/Navbar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const theme = true;
+const theme = false;
 
 const themeDark = createTheme({
   palette: {
