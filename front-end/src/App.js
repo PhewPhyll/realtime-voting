@@ -19,13 +19,13 @@ function App() {
 
   const [data, setData] = useState([])
   const [alert, setAlert] = useState(false)
-  const [centent , setContent] = useState("")
+  const [centent, setContent] = useState("")
   const [user, setUser] = useState("abc")
 
   //Fetch Topics
   useEffect(() => {
 
-    let decrypt_user = Decrypt(window.location.search.replace('?uid=' , ''))
+    let decrypt_user = Decrypt(window.location.search.replace('?uid=', ''))
 
     if (!!decrypt_user) {
       setUser(decrypt_user)
@@ -42,7 +42,7 @@ function App() {
         }
 
       })
-    }else{
+    } else {
 
       setContent("รูปแบบ QRcode หรือ URL ไม่ถูกต้อง กรุณาติดต่อเจ้าหน้าที่")
       setAlert(true)
@@ -85,44 +85,48 @@ function App() {
   return (
     <userContext.Provider value={user}>
       <Box sx={{
-        zIndex: 200,
-        backgroundColor: '#fff',
-        padding: '1rem',
-        position: 'sticky',
-        mt: '7rem',
-        top: '3.7rem'
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight : '100vh'
       }}>
-        {alert ? <Typography sx={{
-          position: 'fixed',
-          top: '50%',
-          left: '50%',
-          transform: "translate(-50% ,-50%)"
-        }} variant='body1'>It's not time to vote yet.</Typography> :
-          <Container>
-            <Searchbar
-              placeholder="Search Topic"
-              onChange={(event) => { setSearchTerm(event.target.value) }}
-            />
-          </Container>}
+        <Box sx={{
+          zIndex: 200,
+          backgroundColor: '#fff',
+          padding: '1rem',
+          position: 'sticky',
+          mt: '7rem',
+          top: '3.7rem'
+        }}>
+          {alert ? <Typography sx={{
+            position: 'fixed',
+            top: '50%',
+            left: '50%',
+            transform: "translate(-50% ,-50%)"
+          }} variant='body2'>It's not time to vote yet.</Typography> :
+            <Container>
+              <Searchbar
+                placeholder="Search Topic"
+                onChange={(event) => { setSearchTerm(event.target.value) }}
+              />
+            </Container>}
+        </Box>
+        <Container maxWidth='lg' sx={{ mt: '1rem', mb: '5rem' }}>
+          <AnimatePresence>
+            <Grid container spacing={2} columns={12}>
+              {data.filter(search_filter).map((e, i) =>
+                <Grid item xs={12} lg={6} key={e._id} sx={{ zIndex: data.length - i }}>
+                  <motion.div key={e._id} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+                    <TopicCard data={e} callback={callback} />
+                  </motion.div>
+                </Grid>
+              )}
+            </Grid>
+          </AnimatePresence>
+
+          <AlertBox content={centent} alert={alert} callbackClose={() => { }} />
+        </Container>
+        <Footer />
       </Box>
-      <Container maxWidth='lg' sx={{ mt: '1rem', mb: '5rem' }}>
-        <AnimatePresence>
-          <Grid container spacing={2} columns={12}>
-            {data.filter(search_filter).map((e, i) =>
-              <Grid item xs={12} lg={6} key={e._id} sx={{ zIndex: data.length - i }}>
-                <motion.div key={e._id} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-                  <TopicCard data={e} callback={callback} />
-                </motion.div>
-              </Grid>
-            )}
-          </Grid>
-        </AnimatePresence>
-
-        <AlertBox content={centent} alert={alert} callbackClose={() => { }} />
-      </Container>
-      
-      <Footer/>
-
     </userContext.Provider>
 
   );

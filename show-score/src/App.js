@@ -1,7 +1,7 @@
 import CardTopic from './Components/CardTopic';
 import Container from '@mui/material/Container';
 import { useEffect, useState } from 'react';
-import { Box, Card, Grid } from '@mui/material';
+import { Box, Card, Grid , Button } from '@mui/material';
 import { motion } from 'framer-motion'
 
 import Loading from './Components/Loading';
@@ -11,11 +11,13 @@ import backend from './Services/backend';
 import ReconnectingEventSource from 'reconnecting-eventsource';
 import config from './config';
 import Wave from './Components/FooterWave/Wave';
+import { useNavigate } from 'react-router-dom'
 
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1)
   const [topics, setTopics] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     let current_page = 1
@@ -92,13 +94,14 @@ function App() {
         <Box sx={{ width : '100%', textAlign : 'center' , mt : '2rem' }}>
           <Incoming />
         </Box>
-        <Card elevation={5} sx={{
+        <Card  elevation={5} sx={{
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          borderRadius : '1rem'
         }}>
           {inComingLst.length === 0 ? <Loading /> :
             <Grid container columns={12} spacing={1} alignItems="center" justifyContent='center'>
@@ -117,7 +120,8 @@ function App() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          borderRadius : '1rem'
         }}>
           <Grid
             container
@@ -150,6 +154,11 @@ function App() {
         </Card>
       </Box>
       <Wave/>
+      <Button sx={{
+        position : 'absolute',
+        right : 30,
+        bottom : 30
+      }} variant='text' onClick={() => navigate('/vote')}>Next</Button>
     </Container>
   );
 }

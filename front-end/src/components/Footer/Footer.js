@@ -1,37 +1,64 @@
-import { Box, Grid, Typography } from '@mui/material'
+import { Box, Grid, Typography, useMediaQuery, useTheme } from '@mui/material'
 import React from 'react'
 
 import Wave from '../FooterWave/Wave'
 import Tower from '../Tower/Tower'
 import barcampLogo from '../../image/barcampLogo.png'
 import pupaLogo_blue from '../../image/pupa_logo_blue.png'
+import './Sun.css'
 
 function Footer() {
+
+    const theme = useTheme()
+    const matches = useMediaQuery(theme.breakpoints.down('xl'))
+
     return (
-        <Grid container columns={12} sx={{
-            width: '100%',
-            height: '300px',
+        // <Grid container columns={12} sx={{
+        //     height: '300px',
+        //     position: 'relative',
+        //     boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
+        //     p: '1rem',
+        //     mt : 'auto'
+        // }}>
+        //     <Grid item lg={4} xs={12} textAlign='center' sx={{ backgroundColor: '#fff' }}>
+        //         <img width='120' src={pupaLogo_blue} alt="BarcampLogo" />
+        //     </Grid>
+        //     <Grid item lg={4} xs={12} textAlign='center' sx={{ backgroundColor: '#fff' }}>
+        //         <Box>
+        //             <Typography variant='h4' fontWeight='bold'>
+        //                 Contact
+        //             </Typography>
+        //         </Box>
+        //     </Grid>
+        //     <Grid item lg={4} xs={12} textAlign='start' sx={{ backgroundColor: '#fff', position: 'relative' }}>
+        //         <img width='300' src={barcampLogo} alt="BarcampLogo" />
+        //         {/* <Tower/> */}
+        //     </Grid>
+        //     <Wave />
+        // </Grid>
+        <Grid container rowGap={3} columns={12} sx={{
             position: 'relative',
             boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
-            p: '1rem'
+            mt: 'auto',
+            width : '100%',
+            alignItems : 'center',
+            justifyContent : 'center',
+            pt : '1rem',
+            pb : '5rem',
+            overflow : 'hidden'
         }}>
-            <Grid item lg={4} xs={12} textAlign='center' sx={{ backgroundColor: '#fff' }}>
-                <Box>
-                    <img style={{ width: "30%", height: 180 }} src={pupaLogo_blue} alt="BarcampLogo" href="/" sx={{ display: { xs: 'none', md: 'flex' } }} />
-                </Box>
+            <Grid item xl={4} xs={12} sx={{ textAlign : 'center' }}>
+                <img width={matches ? '80' : '100'} src={pupaLogo_blue} alt="BarcampLogo" />
             </Grid>
-            <Grid item lg={4} xs={12} textAlign='center' sx={{ backgroundColor: '#fff' }}>
-                <Box>
-                    <Typography variant='h4' fontWeight='bold'>
-                        Contact
-                    </Typography>
-                </Box>
+            <Grid item xl={4} xs={12} sx={{ textAlign : 'center'  }}>
+                <img width={matches ? '150' : '300'} src={barcampLogo} alt="BarcampLogo" />
             </Grid>
-            <Grid item lg={4} xs={12} textAlign='start' sx={{ backgroundColor: '#fff', position: 'relative' }}>
-                <img style={{ width: "55%", height: 180 }} src={barcampLogo} alt="BarcampLogo" href="/" sx={{ display: { xs: 'none', md: 'flex' } }} />
-                <Tower/>
-            </Grid>
+            {/* <Grid item xl={4} xs={12} sx={{ textAlign : 'center' }}>
+                <Typography variant='subtitle1' fontWeight='bold'>Created by PUPA</Typography>
+            </Grid> */}
             <Wave />
+            <Tower />
+            <div className='sun'  />
         </Grid>
     )
 }

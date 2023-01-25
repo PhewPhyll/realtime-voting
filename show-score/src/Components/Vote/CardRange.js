@@ -3,7 +3,7 @@ import React from 'react'
 
 function CardRange({ data }) {
     return (
-        <Card elevation={4}>
+        <Card sx={{ borderRadius : '1rem' }} elevation={4}>
             <CardContent sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
