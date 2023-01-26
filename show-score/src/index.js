@@ -28,7 +28,7 @@ root.render(
     <React.StrictMode>
       <BrowserRouter>
         <Routes>
-          <Route path='' element={<App />} />
+          <Route path='/dashboard' element={<App />} />
           <Route path='/vote' element={<Votepage />} />
         </Routes>
       </BrowserRouter>

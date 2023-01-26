@@ -17,8 +17,6 @@ ssh ${USER}@${TARGET} "mkdir ${CLIENT_DASHBOARD_PATH}/"
 rm my-app.tgz
 cd ..
 
-echo "TARGET = ${TARGET}"
-
 cd show-score
 yarn install
 yarn build
