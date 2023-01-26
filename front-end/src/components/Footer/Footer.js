@@ -13,29 +13,6 @@ function Footer() {
     const matches = useMediaQuery(theme.breakpoints.down('xl'))
 
     return (
-        // <Grid container columns={12} sx={{
-        //     height: '300px',
-        //     position: 'relative',
-        //     boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
-        //     p: '1rem',
-        //     mt : 'auto'
-        // }}>
-        //     <Grid item lg={4} xs={12} textAlign='center' sx={{ backgroundColor: '#fff' }}>
-        //         <img width='120' src={pupaLogo_blue} alt="BarcampLogo" />
-        //     </Grid>
-        //     <Grid item lg={4} xs={12} textAlign='center' sx={{ backgroundColor: '#fff' }}>
-        //         <Box>
-        //             <Typography variant='h4' fontWeight='bold'>
-        //                 Contact
-        //             </Typography>
-        //         </Box>
-        //     </Grid>
-        //     <Grid item lg={4} xs={12} textAlign='start' sx={{ backgroundColor: '#fff', position: 'relative' }}>
-        //         <img width='300' src={barcampLogo} alt="BarcampLogo" />
-        //         {/* <Tower/> */}
-        //     </Grid>
-        //     <Wave />
-        // </Grid>
         <Grid container rowGap={3} columns={12} sx={{
             position: 'relative',
             boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
