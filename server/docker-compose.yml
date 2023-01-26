@@ -16,7 +16,7 @@ services:
       - 27017:27017
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=1234
+      - MONGO_INITDB_ROOT_PASSWORD=pupabarcamp7
       - MONGO_INITDB_DATABASE=mydb
     volumes:
       - ./init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
