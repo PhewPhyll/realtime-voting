@@ -129,10 +129,9 @@ function App() {
             spacing={1}
             sx={{
               width: '100%',
-              padding: '1rem'
+              padding: '1rem',
+              height : '100%'
             }}
-            alignItems="center"
-            justifyContent='center'
           >
             {topics.slice(topicsPerPage * (currentPage - 1), topicsPerPage * currentPage).map((e, i) =>
               <Grid key={i} item xl={4}>
@@ -143,8 +142,11 @@ function App() {
                   animate={{ translateX: 0 }}
                   exit={{ translateX: -2000 }}
                   transition={{ delay: 0.1 * i }}
+                  style={{
+                    height : '100%'
+                  }}
                 >
-                  <CardTopic Topic={e} />
+                  <CardTopic Topic={e} index={i} />
                 </motion.div>
 
               </Grid>

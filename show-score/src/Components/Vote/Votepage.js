@@ -51,6 +51,9 @@ function Votepage() {
     let top10 = all.slice(0, 10)
     let long_duration_top_10 = top10.filter(e => e.long_duration)
     let short_duration_top_10 = top10.filter(e => !e.long_duration)
+    let basic_topics = all.filter(e => e.category === "Basic")
+    let intermediate_topics = all.filter(e => e.category === "Intermediate")
+    let advance_topics = all.filter(e => e.category === "Advance")
     let other = all.slice(10, all.length)
     let obj = [
       {
@@ -58,7 +61,8 @@ function Votepage() {
         columns : [
           {label: "title" , value : (row) => row.title},
           {label: "speaker" , value : (row) => row.speaker},
-          {label : "votes" , value : (row) => row.votes}
+          {label : "votes" , value : (row) => row.votes},
+          {label : "category" , value : (row) => row.category}
         ],
         content : long_duration_top_10
       },
@@ -67,7 +71,8 @@ function Votepage() {
         columns : [
           {label: "title" , value : (row) => row.title},
           {label: "speaker" , value : (row) => row.speaker},
-          {label : "votes" , value : (row) => row.votes}
+          {label : "votes" , value : (row) => row.votes},
+          {label : "category" , value : (row) => row.category}
         ],
         content : short_duration_top_10
       },
@@ -77,9 +82,43 @@ function Votepage() {
           {label: "title" , value : (row) => row.title},
           {label: "speaker" , value : (row) => row.speaker},
           {label: "duration" , value : (row) => (row.long_duration ? '1 Hour' : '30 Minute')},
-          {label : "votes" , value : (row) => row.votes}
+          {label : "votes" , value : (row) => row.votes},
+          {label : "category" , value : (row) => row.category}
         ],
         content : other
+      },
+      {
+        sheet: "Basic",
+        columns : [
+          {label: "title" , value : (row) => row.title},
+          {label: "speaker" , value : (row) => row.speaker},
+          {label: "duration" , value : (row) => (row.long_duration ? '1 Hour' : '30 Minute')},
+          {label : "votes" , value : (row) => row.votes},
+          {label : "category" , value : (row) => row.category}
+        ],
+        content : basic_topics
+      },
+      {
+        sheet: "Intermediate",
+        columns : [
+          {label: "title" , value : (row) => row.title},
+          {label: "speaker" , value : (row) => row.speaker},
+          {label: "duration" , value : (row) => (row.long_duration ? '1 Hour' : '30 Minute')},
+          {label : "votes" , value : (row) => row.votes},
+          {label : "category" , value : (row) => row.category}
+        ],
+        content : intermediate_topics
+      },
+      {
+        sheet: "Advance",
+        columns : [
+          {label: "title" , value : (row) => row.title},
+          {label: "speaker" , value : (row) => row.speaker},
+          {label: "duration" , value : (row) => (row.long_duration ? '1 Hour' : '30 Minute')},
+          {label : "votes" , value : (row) => row.votes},
+          {label : "category" , value : (row) => row.category}
+        ],
+        content : advance_topics
       },
       {
         sheet: "All Topices",
@@ -87,7 +126,8 @@ function Votepage() {
           {label: "title" , value : (row) => row.title},
           {label: "speaker" , value : (row) => row.speaker},
           {label: "duration" , value : (row) => (row.long_duration ? '1 Hour' : '30 Minute')},
-          {label : "votes" , value : (row) => row.votes}
+          {label : "votes" , value : (row) => row.votes},
+          {label : "category" , value : (row) => row.category}
         ],
         content : all
       },
@@ -150,13 +190,14 @@ function Votepage() {
                 spacing={1}
                 alignContent="center">
                 <AnimatePresence>
-                  {allTopics.sort((a, b) => b.votes - a.votes).filter(e => e.votes >= 1).map((e, i) =>
+                  {allTopics.sort((a, b) => b.votes - a.votes).filter(e => e.votes >= 3).slice(10 , allTopics.length).map((e, i) =>
                     <Grid key={e._id} item xl={6}>
                       <motion.div
                         key={e._id}
                         layout
                         initial={{ translateY: 500 }}
                         animate={{ translateY: 0 }}
+                        exit={{ scale : 0 , opacity : 0 }}
                       >
                         <CardRange data={e} />
                       </motion.div>

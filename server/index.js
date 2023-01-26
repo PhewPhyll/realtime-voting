@@ -21,7 +21,7 @@ const sendEventToAll = (data) => {
 }
 
 //Add Topic
-app.post('/add_topic', async (req, res) => {
+app.post('/api/add_topic', async (req, res) => {
     const { topics } = await req.body
 
     await topics.forEach(async element => {
@@ -43,7 +43,7 @@ app.post('/add_topic', async (req, res) => {
 })
 
 //User Vote
-app.post('/voted', async (req, res) => {
+app.post('/api/voted', async (req, res) => {
 
     const { user, id } = req.body
     const topic_selection = await TopicModel.findOne({ _id: id })
@@ -94,7 +94,7 @@ app.post('/voted', async (req, res) => {
 })
 
 //Get Topics
-app.get('/topics', async (req, res) => {
+app.get('/api/topics', async (req, res) => {
     const user = req.query.user
     const topics = await TopicModel.find({})
     const topics_to_send = []
@@ -119,7 +119,7 @@ app.get('/topics', async (req, res) => {
 })
 
 //Get Topics admin
-app.get('/topics_admin', async (req, res) => {
+app.get('/api/topics_admin', async (req, res) => {
 
     const topics = await TopicModel.find({})
     const topics_to_send = []
@@ -138,7 +138,7 @@ app.get('/topics_admin', async (req, res) => {
     res.status(200).send({ topics_to_send: topics_to_send })
 })
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
 
     const headers = {
         'Content-Type': 'text/event-stream',

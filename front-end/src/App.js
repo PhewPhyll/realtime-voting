@@ -117,7 +117,7 @@ function App() {
               {data.filter(search_filter).map((e, i) =>
                 <Grid item xs={12} lg={6} key={e._id} sx={{ zIndex: data.length - i }}>
                   <motion.div key={e._id} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-                    <TopicCard data={e} callback={callback} />
+                    <TopicCard data={e} callback={callback} index={i} />
                   </motion.div>
                 </Grid>
               )}
