@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, useMediaQuery, useTheme } from '@mui/material'
+import { Grid, useMediaQuery, useTheme } from '@mui/material'
 import React from 'react'
 
 import Wave from '../FooterWave/Wave'
