@@ -27,7 +27,7 @@ export default function TopicCard({ data, callback }) {
             } else {
                 setAlert(true)
             }
-        })
+        }).catch(() => window.location.reload())
 
     }
 

@@ -36,7 +36,7 @@ function App() {
           setData(me_vote.concat(not_vote))
         } else {
 
-          setContent("ขณะนี้ยังไม่เปิดให้โหวต กรุณารอให้ถึงเวลาแล้วเข้ามาอีกครั้ง")
+          setContent("ขณะนี้ยังไม่เปิดให้โหวต หรือหมดเวลาโหวต กรุณารอให้ถึงเวลาแล้วเข้ามาอีกครั้ง")
           setAlert(true)
 
         }
@@ -99,10 +99,11 @@ function App() {
         }}>
           {alert ? <Typography sx={{
             position: 'fixed',
-            top: '50%',
+            top: '20%',
             left: '50%',
-            transform: "translate(-50% ,-50%)"
-          }} variant='body2'>It's not time to vote yet.</Typography> :
+            transform: "translate(-50% ,-50%)",
+            textAlign : 'center'
+          }} variant='body2'>It's not time to vote or voting time has expired.</Typography> :
             <Container>
               <Searchbar
                 placeholder="Search Topic"

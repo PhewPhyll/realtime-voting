@@ -3,16 +3,16 @@ import './Tower.css'
 
 function Tower() {
   return (
-    <div class="container">
-      <div class="sand"></div>
-      <div class="tower">
-        <div class="pole"></div>
-        <div class="door"></div>
-        <div class="light-base"></div>
-        <div class="dome"></div>
-        <div class="light"></div>
+    <div className="container">
+      <div className="sand"></div>
+      <div className="tower">
+        <div className="pole"></div>
+        <div className="door"></div>
+        <div className="light-base"></div>
+        <div className="dome"></div>
+        <div className="light"></div>
       </div>
-      <div class="sand-extra"></div>
+      <div className="sand-extra"></div>
     </div>
   )
 }

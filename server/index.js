@@ -24,7 +24,7 @@ const sendEventToAll = (data) => {
 app.post('/add_topic', async (req, res) => {
     const { topics } = await req.body
     await topics.forEach(async element => {
-        const topic = await new TopicModel({ title: element.title , speaker : element.speaker , long_duration : element.long_duration })
+        const topic = await new TopicModel({ title: element.title, speaker: element.speaker, long_duration: element.long_duration })
         await topic.save()
     });
     await res.status(200).send({ message: `Now Added ${topics.map(e => e.title)}` })
@@ -38,40 +38,46 @@ app.post('/voted', async (req, res) => {
     const topic_selection = await TopicModel.findOne({ _id: id })
     const all_topics = await TopicModel.find({})
     let count_vote = 0
-    for (let i = 0; i < all_topics.length; i++) {
+    const Istime = await mongoose.connection.db.collection('console').find().toArray()
+    if (Istime[0].vote) {
+        for (let i = 0; i < all_topics.length; i++) {
 
-        if (all_topics[i].votes.includes(user)) {
-            count_vote += 1
+            if (all_topics[i].votes.includes(user)) {
+                count_vote += 1
+            }
+
+            if (count_vote >= config.limitVote) {
+                break
+            }
+
         }
+        let status = false
 
-        if (count_vote >= config.limitVote) {
-            break
-        }
+        if (await topic_selection.votes.includes(user)) {
 
-    }
-    let status = false
-    
-    if (await topic_selection.votes.includes(user)) {
+            topic_selection.votes = await topic_selection.votes.filter(e => e !== user)
+            status = false
+            await topic_selection.save()
+            sendEventToAll({ user, id, votes: topic_selection.votes.length, event: 'vote' })
+            res.status(200).send({ user, id, status: status })
 
-        topic_selection.votes = await topic_selection.votes.filter(e => e !== user)
-        status = false
-        await topic_selection.save()
-        sendEventToAll({ user, id, votes : topic_selection.votes.length , event: 'vote' })
-        res.status(200).send({ user, id, status: status })
-
-    } else {
-
-        if (count_vote >= config.limitVote) {
-            res.status(200).send({message : "Vote to limit."})
         } else {
 
-            await topic_selection.votes.push(user)
-            status = true
-            await topic_selection.save()
-            sendEventToAll({ user, id, votes : topic_selection.votes.length, event: 'vote' })
-            res.status(200).send({ user, id, status: status })
+            if (count_vote >= config.limitVote) {
+                res.status(200).send({ message: "Vote to limit." })
+            } else {
+
+                await topic_selection.votes.push(user)
+                status = true
+                await topic_selection.save()
+                sendEventToAll({ user, id, votes: topic_selection.votes.length, event: 'vote' })
+                res.status(200).send({ user, id, status: status })
+            }
+
         }
 
+    }else{
+        res.status(404).send({message : "Not time to vote."})
     }
 
 })
@@ -83,21 +89,21 @@ app.get('/topics', async (req, res) => {
     const topics_to_send = []
     const Istime = await mongoose.connection.db.collection('console').find().toArray()
 
-    if(Istime[0].vote){
+    if (Istime[0].vote) {
         for (let i = 0; i < topics.length; i++) {
             let userInVote = topics[i].votes.includes(user)
             topics_to_send.push({
                 _id: topics[i]._id,
                 title: topics[i].title,
                 votes: topics[i].votes.length,
-                speaker : topics[i].speaker,
-                long_duration : topics[i].long_duration,
+                speaker: topics[i].speaker,
+                long_duration: topics[i].long_duration,
                 status: userInVote
             })
         }
     }
 
-    res.status(200).send({topics_to_send , Istime : Istime[0].vote })
+    res.status(200).send({ topics_to_send, Istime: Istime[0].vote })
 })
 
 //Get Topics admin
@@ -106,17 +112,17 @@ app.get('/topics_admin', async (req, res) => {
     const topics = await TopicModel.find({})
     const topics_to_send = []
 
-        for (let i = 0; i < topics.length; i++) {
-            topics_to_send.push({
-                _id: topics[i]._id,
-                title: topics[i].title,
-                votes: topics[i].votes.length,
-                speaker : topics[i].speaker,
-                long_duration : topics[i].long_duration,
-            })
-        }
+    for (let i = 0; i < topics.length; i++) {
+        topics_to_send.push({
+            _id: topics[i]._id,
+            title: topics[i].title,
+            votes: topics[i].votes.length,
+            speaker: topics[i].speaker,
+            long_duration: topics[i].long_duration,
+        })
+    }
 
-    res.status(200).send({ topics_to_send : topics_to_send })
+    res.status(200).send({ topics_to_send: topics_to_send })
 })
 
 app.get('/', (req, res) => {

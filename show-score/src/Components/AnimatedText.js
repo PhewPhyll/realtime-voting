@@ -5,7 +5,7 @@ import { Typography } from "@mui/material";
 // Word wrapper
 const Wrapper = (props) => {
     // We'll do this to prevent wrapping of words using CSS
-    return <Typography color='secondary' variant="h3" className="word-wrapper">{props.children}</Typography>;
+    return <Typography color='secondary' variant="h3" className=Name="word-wrapper">{props.children}</Typography>;
 };
 
 // Map API "type" vaules to JSX tag names
