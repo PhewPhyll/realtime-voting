@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { CardActionArea, CardActions, colors, Divider, IconButton } from '@mui/material';
+import { CardActions,  Divider, IconButton } from '@mui/material';
 import { Box } from '@mui/material'
 import backend from '../../Services/backend';
 import { userContext } from '../../App';
@@ -12,6 +12,7 @@ import AlertBox from '../AlertBox/AlertBox';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+import CategoryIcon from '@mui/icons-material/Category';
 
 export default function TopicCard({ data, callback }) {
 
@@ -58,6 +59,12 @@ export default function TopicCard({ data, callback }) {
                         <AccessTimeFilledIcon />
                         <Typography variant='body2'>
                             {data.long_duration ? "1 ชั่วโมง" : "30 นาที"}
+                        </Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <CategoryIcon />
+                        <Typography variant='body2'>
+                            {data.category}
                         </Typography>
                     </Box>
                 </Box>

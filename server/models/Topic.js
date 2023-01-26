@@ -6,6 +6,7 @@ const TopicModel = new Schema({
     title : String,
     speaker : String,
     long_duration  :Boolean,
+    category : String,
     votes : [String]
 })
 
