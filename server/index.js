@@ -5,7 +5,7 @@ const app = express()
 const TopicModel = require('./models/Topic')
 const cors = require('cors')
 
-mongoose.connect(config.apiPrefix).then(() => {
+mongoose.connect(config.databaseURL).then(() => {
     console.log("Connected To Database.")
 }).catch((err) => {
     console.error(err)
