@@ -23,8 +23,19 @@ const sendEventToAll = (data) => {
 //Add Topic
 app.post('/add_topic', async (req, res) => {
     const { topics } = await req.body
+
     await topics.forEach(async element => {
-        const topic = await new TopicModel({ title: element.title, speaker: element.speaker, long_duration: element.long_duration , category : element.category })
+        let category = ""
+        if (element.category === 0) {
+            category = "Basic"
+        }
+        if (element.category === 1) {
+            category = "Intermediate"
+        }
+        if (element.category === 2) {
+            category = "Advance"
+        }
+        const topic = await new TopicModel({ title: element.title, speaker: element.speaker, long_duration: element.long_duration, category })
         await topic.save()
     });
     await res.status(200).send({ message: `Now Added ${topics.map(e => e.title)}` })
@@ -76,8 +87,8 @@ app.post('/voted', async (req, res) => {
 
         }
 
-    }else{
-        res.status(404).send({message : "Not time to vote."})
+    } else {
+        res.status(404).send({ message: "Not time to vote." })
     }
 
 })
@@ -98,7 +109,7 @@ app.get('/topics', async (req, res) => {
                 votes: topics[i].votes.length,
                 speaker: topics[i].speaker,
                 long_duration: topics[i].long_duration,
-                category : topics[i].category,
+                category: topics[i].category,
                 status: userInVote
             })
         }
@@ -120,7 +131,7 @@ app.get('/topics_admin', async (req, res) => {
             votes: topics[i].votes.length,
             speaker: topics[i].speaker,
             long_duration: topics[i].long_duration,
-            category : topics[i].category
+            category: topics[i].category
         })
     }
 
