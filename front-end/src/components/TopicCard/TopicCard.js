@@ -58,19 +58,19 @@ export default function TopicCard({ data, callback, index }) {
                 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <AccountCircleIcon sx={{ color: '#4ED99E' }} />
-                        <Typography variant='body2'>
+                        <Typography variant='caption'>
                             {data.speaker}
                         </Typography>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <AccessTimeFilledIcon sx={{ color: '#DE8887' }} />
-                        <Typography variant='body2'>
+                        <Typography variant='caption'>
                             {data.long_duration ? "1 ชั่วโมง" : "30 นาที"}
                         </Typography>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <CategoryIcon sx={{ color: '#A62B66' }} />
-                        <Typography variant='body2'>
+                        <Typography variant='caption'>
                             {data.category !== "" ? data.category : 'N/A'}
                         </Typography>
                     </Box>
