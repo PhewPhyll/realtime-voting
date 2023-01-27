@@ -26,9 +26,9 @@ const themeLight = createTheme({
 root.render(
   <ThemeProvider theme={themeLight}>
     <React.StrictMode>
-      <BrowserRouter>
+      <BrowserRouter basename="/dashboard">
         <Routes>
-          <Route path='/dashboard' element={<App />} />
+          <Route path='/' element={<App />} />
           <Route path='/vote' element={<Votepage />} />
         </Routes>
       </BrowserRouter>
