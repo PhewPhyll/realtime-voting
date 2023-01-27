@@ -5,7 +5,7 @@ const app = express()
 const TopicModel = require('./models/Topic')
 const cors = require('cors')
 
-mongoose.connect(config.databaseURL).then(() => {
+mongoose.connect(`${config.databaseURL}/Topics?authSource=admin`).then(() => {
     console.log("Connected To Database.")
 }).catch((err) => {
     console.error(err)
@@ -19,6 +19,31 @@ let clients = []
 const sendEventToAll = (data) => {
     clients.forEach(client => client.res.write(`data: ${JSON.stringify(data)}\n\n`))
 }
+
+app.get('/api', (req, res) => {
+
+    const headers = {
+        'Content-Type': 'text/event-stream',
+        'Connection': 'keep-alive',
+        'Cache-Control': 'no-cache',
+        'X-Accel-Buffering': 'no'
+    };
+    res.writeHead(200, headers);
+
+    const clientId = Date.now();
+
+    const newClient = {
+        id: clientId,
+        res
+    };
+
+    clients.push(newClient);
+
+    req.on('close', () => {
+        console.log(`${clientId} Connection closed`);
+        clients = clients.filter(client => client.id !== clientId);
+    });
+})
 
 //Add Topic
 app.post('/api/add_topic', async (req, res) => {
@@ -100,7 +125,7 @@ app.get('/api/topics', async (req, res) => {
     const topics_to_send = []
     const Istime = await mongoose.connection.db.collection('console').find().toArray()
 
-    if (Istime[0].vote) {
+    if (Istime[0]?.vote) {
         for (let i = 0; i < topics.length; i++) {
             let userInVote = topics[i].votes.includes(user)
             topics_to_send.push({
@@ -137,31 +162,6 @@ app.get('/api/topics_admin', async (req, res) => {
 
     res.status(200).send({ topics_to_send: topics_to_send })
 })
-
-app.get('/api', (req, res) => {
-
-    const headers = {
-        'Content-Type': 'text/event-stream',
-        'Connection': 'keep-alive',
-        'Cache-Control': 'no-cache'
-    };
-    res.writeHead(200, headers);
-
-    const clientId = Date.now();
-
-    const newClient = {
-        id: clientId,
-        res
-    };
-
-    clients.push(newClient);
-
-    req.on('close', () => {
-        console.log(`${clientId} Connection closed`);
-        clients = clients.filter(client => client.id !== clientId);
-    });
-})
-
 
 app.listen(config.port, () => {
     console.log("Server is Running...")
