@@ -5,7 +5,13 @@ const app = express()
 const TopicModel = require('./models/Topic')
 const cors = require('cors')
 
-mongoose.connect(`${config.databaseURL}/Topics?authSource=admin`).then(() => {
+// mongoose.connect(`${config.databaseURL}/Topics?authSource=admin`).then(() => {
+//     console.log("Connected To Database.")
+// }).catch((err) => {
+//     console.error(err)
+// })
+
+mongoose.connect(`${config.databaseURL}`).then(() => {
     console.log("Connected To Database.")
 }).catch((err) => {
     console.error(err)

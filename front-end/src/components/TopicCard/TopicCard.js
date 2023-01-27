@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { CardActions,  Divider, IconButton , colors } from '@mui/material';
+import { CardActions, Divider, IconButton, colors } from '@mui/material';
 import { Box } from '@mui/material'
 import backend from '../../Services/backend';
 import { userContext } from '../../App';
@@ -14,7 +14,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import CategoryIcon from '@mui/icons-material/Category';
 
-export default function TopicCard({ data, callback , index }) {
+export default function TopicCard({ data, callback, index }) {
 
     const [alert, setAlert] = useState(false)
     const [check, setCheck] = useState(data.status);
@@ -37,9 +37,16 @@ export default function TopicCard({ data, callback , index }) {
     }
 
     return (
-        <Card sx={{ borderRadius: '1rem'}} elevation={4}>
+        <Card sx={{ borderRadius: '1rem' }} elevation={4}>
             <CardContent>
-                <Typography fontWeight='bold' gutterBottom variant='h5' component='div'>
+                <Typography sx={{
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    display: "-webkit-box",
+                    whiteSpace: 'pre-wrap',
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: "vertical"
+                }} fontWeight='bold' gutterBottom variant='h5' component='div'>
                     {data.title}
                 </Typography>
                 <Box sx={{
@@ -50,29 +57,29 @@ export default function TopicCard({ data, callback , index }) {
                     mt: '1rem'
                 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <AccountCircleIcon sx={{ color : '#4ED99E' }} />
+                        <AccountCircleIcon sx={{ color: '#4ED99E' }} />
                         <Typography variant='body2'>
                             {data.speaker}
                         </Typography>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <AccessTimeFilledIcon sx={{ color : '#DE8887' }} />
+                        <AccessTimeFilledIcon sx={{ color: '#DE8887' }} />
                         <Typography variant='body2'>
                             {data.long_duration ? "1 ชั่วโมง" : "30 นาที"}
                         </Typography>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <CategoryIcon sx={{ color : '#A62B66' }} />
+                        <CategoryIcon sx={{ color: '#A62B66' }} />
                         <Typography variant='body2'>
-                            {data.category}
+                            {data.category !== "" ? data.category : 'N/A'}
                         </Typography>
                     </Box>
                 </Box>
             </CardContent>
             <Divider />
-            <CardActions sx={{ gap : 1 }}>
-                <IconButton  onClick={checker}>
-                    <FavoriteIcon style={{color : check ? colors.red['A400'] : colors.grey['500']}} />
+            <CardActions sx={{ gap: 1 }}>
+                <IconButton onClick={checker}>
+                    <FavoriteIcon style={{ color: check ? colors.red['A400'] : colors.grey['500'] }} />
                 </IconButton>
                 <Typography fontWeight='bold' variant='body2'>{check ? "โหวตแล้ว" : "ยังไม่ได้โหวต"}</Typography>
             </CardActions>

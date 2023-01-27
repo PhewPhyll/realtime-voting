@@ -8,7 +8,7 @@ echo "TARGET = ${TARGET}"
 
 cd front-end
 yarn install
-yarn build
+yarn winBuild
 tar zcf my-app.tgz build/*
 scp -r my-app.tgz ${USER}@${TARGET}:/tmp
 ssh ${USER}@${TARGET} "rm -rf ${CLIENT_PATH}/*"
@@ -19,7 +19,7 @@ cd ..
 
 cd show-score
 yarn install
-yarn build
+yarn winBuild
 tar zcf my-app.tgz build/*
 scp -r my-app.tgz ${USER}@${TARGET}:/tmp
 ssh ${USER}@${TARGET} "rm -rf ${CLIENT_DASHBOARD_PATH}/*"
