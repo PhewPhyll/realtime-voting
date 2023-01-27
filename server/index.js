@@ -75,7 +75,7 @@ app.post('/api/voted', async (req, res) => {
     const all_topics = await TopicModel.find({})
     let count_vote = 0
     const Istime = await mongoose.connection.db.collection('console').find().toArray()
-    if (Istime[0].vote) {
+    if (Istime[0]?.vote) {
         for (let i = 0; i < all_topics.length; i++) {
 
             if (all_topics[i].votes.includes(user)) {
@@ -140,7 +140,7 @@ app.get('/api/topics', async (req, res) => {
         }
     }
 
-    res.status(200).send({ topics_to_send, Istime: Istime[0].vote })
+    res.status(200).send({ topics_to_send, Istime: Istime[0]?.vote })
 })
 
 //Get Topics admin
