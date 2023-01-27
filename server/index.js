@@ -20,7 +20,7 @@ const sendEventToAll = (data) => {
     clients.forEach(client => client.res.write(`data: ${JSON.stringify(data)}\n\n`))
 }
 
-app.get('/api', (req, res) => {
+app.get('/api/sse', (req, res) => {
 
     const headers = {
         'Content-Type': 'text/event-stream',

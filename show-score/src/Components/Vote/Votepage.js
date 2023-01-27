@@ -22,7 +22,7 @@ function Votepage() {
 
   useEffect(() => {
 
-    const es = new ReconnectingEventSource(config.apiUrlPrefix);
+    const es = new ReconnectingEventSource(config.apiUrlPrefix + '/sse');
 
     es.onmessage = async (event) => {
 

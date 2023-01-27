@@ -57,7 +57,7 @@ function App() {
       setTopics(topics.map(e => e.title))
     })
 
-    const es = new ReconnectingEventSource(config.apiUrlPrefix);
+    const es = new ReconnectingEventSource(config.apiUrlPrefix + '/sse');
 
     es.onmessage = (event) => {
 
