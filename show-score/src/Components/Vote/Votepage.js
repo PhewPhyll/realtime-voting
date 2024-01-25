@@ -149,6 +149,7 @@ function Votepage() {
   }
 
   return (
+    <div style={{ background: 'linear-gradient(180deg, rgba(225,149,0,1) 0%, rgba(231,0,0,1) 100%)' }}>
     <Container maxWidth="90%" sx={{ mt: '3rem' }}>
       <Grid container columns={10} spacing={2} sx={{ height: '90vh', }}>
         <Grid item xl={4}>
@@ -156,10 +157,10 @@ function Votepage() {
             height: '100%',
            borderRadius: '1rem', 
            position: 'relative',
-           background : 'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(230,252,255,1) 100%)',
+           background : '#fff',
            }}>
             <CardContent sx={{ height: '100%' }}>
-              <Typography sx={{ textAlign: "center" }} fontWeight='bold' color='secondary' variant='h2'>TOP 10</Typography>
+              <Typography sx={{ textAlign: "center" }} fontWeight='bold' color='#FF0000' variant='h2'>TOP 10</Typography>
               <Grid
                 sx={{ height: '100%', mt: '1rem' }}
                 container
@@ -244,7 +245,7 @@ function Votepage() {
         <Grid item xl={6}>
           <Card elevation={5} sx={{ height: '100%', borderRadius: '1rem' }}>
             <CardContent>
-              <Typography sx={{ textAlign: "center" }} fontWeight='bold' color='secondary' variant='h4'>Topics</Typography>
+              <Typography sx={{ textAlign: "center" }} fontWeight='bold' color='#FF0000' variant='h4'>Topics</Typography>
               <Grid sx={{ height: '100%', mt: '1rem' }}
                 container
                 columns={12}
@@ -270,13 +271,14 @@ function Votepage() {
           </Card>
         </Grid>
       </Grid>
-      <Wave />
+      {/* <Wave /> */}
       <Button sx={{
         position: 'absolute',
         right: 30,
         bottom: 30
       }} variant='text' onClick={Summary}>Summary</Button>
     </Container>
+    </div>
   )
 }
 
