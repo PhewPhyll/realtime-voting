@@ -3,7 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import barcampLogo from '../../image/barcampLogo.png';
+import barcampLogo from '../../image/BARCAMP8xl-removebg-preview.png';
 import { Typography } from '@mui/material';
 
 function NavBar() {

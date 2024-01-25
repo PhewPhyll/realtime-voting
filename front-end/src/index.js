@@ -21,7 +21,7 @@ const themeDark = createTheme({
     }
   },
   typography: {
-    fontFamily: 'Pridi, serif'
+    fontFamily: 'Noto Sans Thai, san serif'
   },
 })
 
@@ -36,7 +36,7 @@ const themeLight = createTheme({
     }
   },
   typography: {
-    fontFamily: 'Pridi, serif'
+    fontFamily: 'Noto Sans Thai, san serif'
   }
 })
 

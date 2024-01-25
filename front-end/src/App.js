@@ -25,7 +25,8 @@ function App() {
   //Fetch Topics
   useEffect(() => {
 
-    let decrypt_user = Decrypt(window.location.search.replace('?uid=', ''))
+    // let decrypt_user = Decrypt(window.location.search.replace('?uid=', ''))
+    let decrypt_user = window.location.search.replace('?uid=', '')
 
     if (!!decrypt_user) {
       setUser(decrypt_user)
@@ -91,7 +92,6 @@ function App() {
       }}>
         <Box sx={{
           zIndex: 200,
-          backgroundColor: '#fff',
           padding: '1rem',
           position: 'sticky',
           mt: '7rem',
