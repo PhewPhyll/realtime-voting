@@ -18,6 +18,8 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1)
   const [topics, setTopics] = useState([])
   const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(() => {
     let current_page = 1
@@ -55,6 +57,7 @@ function App() {
     backend.get('/topics_admin').then(res => {
       let topics = res.data.topics_to_send
       setTopics(topics.map(e => e.title))
+      setIsLoading(false);
     })
 
     const es = new ReconnectingEventSource(config.apiUrlPrefix + '/sse');
@@ -83,7 +86,7 @@ function App() {
 
   return (
     <div style={{ background: 'linear-gradient(180deg, rgba(225,149,0,1) 0%, rgba(231,0,0,1) 100%)' }}>
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{ pb: '6rem' }} >
         <Box sx={{
           display: 'grid',
           gridTemplateRows: '100px 1fr 1fr',
@@ -103,15 +106,15 @@ function App() {
             overflow: 'hidden',
             borderRadius : '1rem'
           }}>
-            {inComingLst.length === 0 ? <Loading /> :
-              <Grid container columns={12} spacing={1} alignItems="center" justifyContent='center'>
+            {isLoading ? ( <Loading /> ) :
+              (<Grid container columns={12} spacing={1} alignItems="center" justifyContent='center'>
                 {inComingLst.slice(0,1).map(e =>
                   <Grid key={e} item xl={4}>
                     <motion.div key={e} layout>
                       <IncommingNow key={e} title={e} callback={callback_when_end_incomming} />
                     </motion.div>
                   </Grid>)}
-              </Grid>
+              </Grid>)
             }
           </Card>
           <Card elevation={5} sx={{
