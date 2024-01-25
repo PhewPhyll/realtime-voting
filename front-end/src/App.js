@@ -28,27 +28,27 @@ function App() {
     // let decrypt_user = Decrypt(window.location.search.replace('?uid=', ''))
     let decrypt_user = window.location.search.replace('?uid=', '')
 
-    if (!!decrypt_user) {
-      setUser(decrypt_user)
-      backend.get(`/topics/?user=${decrypt_user}`).then(res => {
-        if (res.data.Istime) {
-          let me_vote = res.data.topics_to_send.filter(e => e.status)
-          let not_vote = res.data.topics_to_send.filter(e => !e.status).sort(() => 0.5 - Math.random())
-          setData(me_vote.concat(not_vote))
-        } else {
+    // if (!!decrypt_user) {
+    //   setUser(decrypt_user)
+    //   backend.get(`/topics/?user=${decrypt_user}`).then(res => {
+    //     if (res.data.Istime) {
+    //       let me_vote = res.data.topics_to_send.filter(e => e.status)
+    //       let not_vote = res.data.topics_to_send.filter(e => !e.status).sort(() => 0.5 - Math.random())
+    //       setData(me_vote.concat(not_vote))
+    //     } else {
 
-          setContent("ขณะนี้ยังไม่เปิดให้โหวต หรือหมดเวลาโหวต กรุณารอให้ถึงเวลาแล้วเข้ามาอีกครั้ง")
-          setAlert(true)
+    //       setContent("ขณะนี้ยังไม่เปิดให้โหวต หรือหมดเวลาโหวต กรุณารอให้ถึงเวลาแล้วเข้ามาอีกครั้ง")
+    //       setAlert(true)
 
-        }
+    //     }
 
-      })
-    } else {
+    //   })
+    // } else {
 
-      setContent("รูปแบบ QRcode หรือ URL ไม่ถูกต้อง กรุณาติดต่อเจ้าหน้าที่")
-      setAlert(true)
+    //   setContent("รูปแบบ QRcode หรือ URL ไม่ถูกต้อง กรุณาติดต่อเจ้าหน้าที่")
+    //   setAlert(true)
 
-    }
+    // }
 
   }, [user])
 

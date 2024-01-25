@@ -19,7 +19,7 @@ const themeLight = createTheme({
     }
   },
   typography: {
-    fontFamily: 'Pridi, serif'
+    fontFamily:"Noto Sans Thai"
   }
 })
 

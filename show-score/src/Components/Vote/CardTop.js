@@ -6,7 +6,7 @@ function CardTop({ data, index }) {
 
   return (
     <Card elevation={4} sx={{
-      backgroundColor: `rgba(82 , 226 , 238 , ${4 / (index + 1)})`,
+      backgroundColor: `rgba(255 , 150 , 55 , ${4 / (index + 1)})`,
       borderRadius: '1rem',
       position: 'relative',
     }}>
