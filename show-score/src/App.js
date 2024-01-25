@@ -163,7 +163,7 @@ function App() {
           position : 'absolute',  
           right : 30,
           bottom : 20,
-          color: '#FF0000',
+          color: '#fff',
           fontSize: '18px' 
         }} variant='text' onClick={() => navigate('/vote')}>Next</Button>
       </Container>
