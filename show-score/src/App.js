@@ -82,86 +82,89 @@ function App() {
 
 
   return (
-
-    <Container maxWidth="xl">
-      <Box sx={{
-        display: 'grid',
-        gridTemplateRows: '100px 1fr 1fr',
-        width: '100%',
-        height: '90vh',
-        gap: '1rem'
-      }}>
-        <Box sx={{ width : '100%', textAlign : 'center' , mt : '2rem' }}>
-          <Incoming />
-        </Box>
-        <Card  elevation={5} sx={{
+    <div style={{ background: 'linear-gradient(180deg, rgba(225,149,0,1) 0%, rgba(231,0,0,1) 100%)' }}>
+      <Container maxWidth="xl">
+        <Box sx={{
+          display: 'grid',
+          gridTemplateRows: '100px 1fr 1fr',
           width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden',
-          borderRadius : '1rem'
+          height: '90vh',
+          gap: '1rem'
         }}>
-          {inComingLst.length === 0 ? <Loading /> :
-            <Grid container columns={12} spacing={1} alignItems="center" justifyContent='center'>
-              {inComingLst.slice(0,1).map(e =>
-                <Grid key={e} item xl={4}>
-                  <motion.div key={e} layout>
-                    <IncommingNow key={e} title={e} callback={callback_when_end_incomming} />
-                  </motion.div>
-                </Grid>)}
-            </Grid>
-          }
-        </Card>
-        <Card elevation={5} sx={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden',
-          borderRadius : '1rem'
-        }}>
-          <Grid
-            container
-            columns={12}
-            spacing={1}
-            sx={{
-              width: '100%',
-              padding: '1rem',
-              height : '100%'
-            }}
-          >
-            {topics.slice(topicsPerPage * (currentPage - 1), topicsPerPage * currentPage).map((e, i) =>
-              <Grid key={i} item xl={4}>
-                <motion.div
-                  layout
-                  key={e}
-                  initial={{ translateX: 2000 }}
-                  animate={{ translateX: 0 }}
-                  exit={{ translateX: -2000 }}
-                  transition={{ delay: 0.1 * i }}
-                  style={{
-                    height : '100%'
-                  }}
-                >
-                  <CardTopic Topic={e} index={i} />
-                </motion.div>
-
+          <Box sx={{ width : '100%', textAlign : 'center' , mt : '2rem' }}>
+            <Incoming />
+          </Box>
+          <Card  elevation={5} sx={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            overflow: 'hidden',
+            borderRadius : '1rem'
+          }}>
+            {inComingLst.length === 0 ? <Loading /> :
+              <Grid container columns={12} spacing={1} alignItems="center" justifyContent='center'>
+                {inComingLst.slice(0,1).map(e =>
+                  <Grid key={e} item xl={4}>
+                    <motion.div key={e} layout>
+                      <IncommingNow key={e} title={e} callback={callback_when_end_incomming} />
+                    </motion.div>
+                  </Grid>)}
               </Grid>
-            )}
+            }
+          </Card>
+          <Card elevation={5} sx={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            overflow: 'hidden',
+            borderRadius : '1rem'
+          }}>
+            <Grid
+              container
+              columns={12}
+              spacing={1}
+              sx={{
+                width: '100%',
+                padding: '1rem',
+                height : '100%'
+              }}
+            >
+              {topics.slice(topicsPerPage * (currentPage - 1), topicsPerPage * currentPage).map((e, i) =>
+                <Grid key={i} item xl={4}>
+                  <motion.div
+                    layout
+                    key={e}
+                    initial={{ translateX: 2000 }}
+                    animate={{ translateX: 0 }}
+                    exit={{ translateX: -2000 }}
+                    transition={{ delay: 0.1 * i }}
+                    style={{
+                      height : '100%'
+                    }}
+                  >
+                    <CardTopic Topic={e} index={i} />
+                  </motion.div>
 
-          </Grid>
-        </Card>
-      </Box>
-      <Wave/>
-      <Button sx={{
-        position : 'absolute',
-        right : 30,
-        bottom : 30
-      }} variant='text' onClick={() => navigate('/vote')}>Next</Button>
-    </Container>
+                </Grid>
+              )}
+
+            </Grid>
+          </Card>
+        </Box>
+        {/* <Wave/> */}
+        <Button sx={{
+          position : 'absolute',  
+          right : 30,
+          bottom : 20,
+          color: '#FF0000',
+          fontSize: '18px' 
+        }} variant='text' onClick={() => navigate('/vote')}>Next</Button>
+      </Container>
+    </div>
   );
 }
 
