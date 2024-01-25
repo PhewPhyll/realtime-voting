@@ -133,7 +133,7 @@ export default function TopicCard({ data, callback, index }) {
                                     fontWeight: '700',
                                     fontSize: 32,
                                     color: '#F00',
-                                    fontFamily: 'Assistant',
+                                    fontFamily: 'Noto Sans Thai',
                                     justifyContent: 'center',
                                 }}
                                 gutterBottom
@@ -155,7 +155,7 @@ export default function TopicCard({ data, callback, index }) {
                                 fontWeight: '700',  // หรือใช้ 'bolder' ตามความต้องการ
                                 fontSize: 15,
                                 color: '#F00',
-                                fontFamily: 'Assistant'
+                                fontFamily: 'Noto Sans Thai'
                             }}
                                 gutterBottom
                                 component='div'
@@ -166,7 +166,7 @@ export default function TopicCard({ data, callback, index }) {
                             fontWeight: '700',  // หรือใช้ 'bolder' ตามความต้องการ
                             fontSize: 12,
                             color: '#F00',
-                            fontFamily: 'Assistant'
+                            fontFamily: 'Noto Sans Thai'
                         }} elevation={4}>
                             {data.description}
                         </Typography> : null}
@@ -182,7 +182,7 @@ export default function TopicCard({ data, callback, index }) {
                                             fontWeight: '700',  // หรือใช้ 'bolder' ตามความต้องการ
                                             fontSize: 15,
                                             color: '#F00',
-                                            fontFamily: 'Assistant'
+                                            fontFamily: 'Noto Sans Thai'
                                         }}>
                                             {data.speaker}
                                         </Typography>
@@ -199,7 +199,7 @@ export default function TopicCard({ data, callback, index }) {
                                             fontWeight: '700',  // หรือใช้ 'bolder' ตามความต้องการ
                                             fontSize: 15,
                                             color: '#F00',
-                                            fontFamily: 'Assistant'
+                                            fontFamily: 'Noto Sans Thai'
                                         }}>
                                             {data.long_duration ? "1 ชั่วโมง" : "30 นาที"}
                                         </Typography>
@@ -216,7 +216,7 @@ export default function TopicCard({ data, callback, index }) {
                                             fontWeight: '700',  // หรือใช้ 'bolder' ตามความต้องการ
                                             fontSize: 15,
                                             color: '#F00',
-                                            fontFamily: 'Assistant'
+                                            fontFamily: 'Noto Sans Thai'
                                         }}>
                                             {data.category !== "" ? data.category : 'N/A'}
                                         </Typography>
