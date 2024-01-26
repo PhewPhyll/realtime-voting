@@ -1,7 +1,7 @@
 import { Grid, useMediaQuery, useTheme } from "@mui/material";
 import React from "react";
 
-import Wave from "../FooterWave/Wave";
+// import Wave from "../FooterWave/Wave";
 import Tower from "../Tower/Tower";
 import barcampLogo from "../../image/DragonBARCAMPblack8sxl-removebg-preview_w_bg.png";
 import pupaLogo_blue from "../../image/pupa_logo_blue_with_bg.png";
@@ -28,8 +28,7 @@ function Footer() {
         // marginY: 'auto',
         alignItems: "center",
         justifyContent: "center",
-        pt: "1rem",
-        pb: "5rem",
+        
         overflow: "hidden",
       }}
     >
@@ -38,11 +37,11 @@ function Footer() {
       <div class="cloud b"></div>
       <div class="cloud c"></div>
       <div class="land">
-        <div class="tree"></div>
+        {/* <div class="tree"></div>
         <div class="tree a"></div>
         <div class="tree b"></div>
         <div class="tree c"></div>
-        <div class="tree d"></div>
+        <div class="tree d"></div> */}
       </div>
       <div class="star"></div>
       <div class="star a"></div>
@@ -59,21 +58,21 @@ function Footer() {
       <Grid
         item
         xl={4}
-        xs={12}
+        xs={6}
         sx={{
           textAlign: "center",
           zIndex: "10",
         }}
       >
         <img
-          width={matches ? "150" : "200"}
+          width={matches ? "80" : "120"}
           src={pupaLogo_blue}
           alt="BarcampLogo"
         />
       </Grid>
-      <Grid item xl={4} xs={12} sx={{ textAlign: "center", zIndex: "10" }}>
+      <Grid item xl={4} xs={6} sx={{ textAlign: "center", zIndex: "10" }}>
         <img
-          width={matches ? "150" : "200"}
+          width={matches ? "80" : "120"}
           src={barcampLogo}
           alt="BarcampLogo"
         />
@@ -82,7 +81,7 @@ function Footer() {
                 <Typography variant='subtitle1' fontWeight='bold'>Created by PUPA</Typography>
             </Grid> */}
       {/* <Wave /> */}
-      <Tower />
+      {/* <Tower /> */}
       {/* <div className='sun'  /> */}
     </Grid>
   );
