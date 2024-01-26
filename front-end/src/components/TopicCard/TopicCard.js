@@ -162,6 +162,7 @@ export default function TopicCard({ data, callback, index }) {
                             right: 2,
                             top: 2,
                             color: (theme) => theme.palette.grey[500],
+                            zIndex:1
                         }}
                     >
                         <CloseIcon />
@@ -174,6 +175,7 @@ export default function TopicCard({ data, callback, index }) {
                                     left: 8,
                                     top: 8,
                                     color: '#FFD700',
+                                    zIndex:1
                                 }}
                             />
                             <Box
@@ -185,6 +187,7 @@ export default function TopicCard({ data, callback, index }) {
                                     color: '#FFD700',
                                     fontWeight: '700',
                                     fontFamily: 'Noto Sans Thai',
+                                    zIndex:1
 
                                 }}
                             >
