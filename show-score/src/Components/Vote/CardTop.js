@@ -15,19 +15,20 @@ function CardTop({ data, index }) {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '80%'
+        height: '85px'
       }}>
-        <div style={{ textAlign: 'center' , maxWidth : "180px", marginRight : "38px"}}>
+        <div style={{ textAlign: 'center' , maxWidth : "170 px", marginRight : "38px",}}>
           <Typography
             fontWeight='bold'
             noWrap
             textOverflow='ellipsis'
+            paddingTop={'5px'}
             sx={{
               overflow: "hidden",
               textOverflow: "ellipsis",
               display: "-webkit-box",
               whiteSpace: 'pre-wrap',
-              WebkitLineClamp: 3,
+              WebkitLineClamp: 2,
               WebkitBoxOrient: "vertical",
             }}
             variant='h6'
@@ -36,7 +37,7 @@ function CardTop({ data, index }) {
             {data.title}
           </Typography>
           <Typography
-            fontWeight='bold'
+            fontWeight='normal'
             variant='h6'
           >
             by {data.speaker}

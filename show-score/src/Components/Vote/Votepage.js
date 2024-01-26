@@ -160,9 +160,9 @@ function Votepage() {
   }
 
   return (
-    <div style={{ background: 'linear-gradient(180deg, rgba(225,149,0,1) 0%, rgba(231,0,0,1) 100%)' }}>
-      <Container maxWidth="90%" sx={{ pt: '3rem', pb: '4rem' }}>
-        <Grid container columns={10} spacing={2} sx={{ height: '90vh', }}>
+    <div style={{ background: 'linear-gradient(180deg, rgba(225,149,0,1) 0%, rgba(231,0,0,1) 100%)'}}>
+      <Container maxWidth="90%" sx={{ pt: '2rem', pb: '4rem' }}>
+        <Grid container columns={10} spacing={2} sx={{ height: 'auto', }}>
           <Grid item xl={4}>
             <Card elevation={5} sx={{
               height: '100%',
@@ -260,14 +260,14 @@ function Votepage() {
             <Card elevation={5} sx={{ height: '100%', borderRadius: '1rem' }}>
               <CardContent sx={{ height: '100%', backgroundImage: `url(${logobarcamp2})`, backgroundSize: '80%', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}>
                 <Typography sx={{ textAlign: "center" }} fontWeight='bold' color='#FF0000' variant='h3'>Topics</Typography>
-                <Grid sx={{ height: '100%', mt: '1rem' }}
+                <Grid sx={{ height: '100%' }}
                   container
                   columns={12}
                   spacing={1}
                   alignContent="center">
                   <AnimatePresence>
-                    {allTopics.sort((a, b) => b.votes - a.votes).filter(e => e.votes >= 3).slice(10, allTopics.length).map((e, i) =>
-                      <Grid key={e._id} item xl={4} sx={{ zIndex: 10, position: 'relative' }}>
+                    {allTopics.sort((a, b) => b.votes - a.votes).filter(e => e.votes >= 3).slice(value, allTopics.length).map((e, i) =>
+                      <Grid key={e._id} item xl={4} sx={{ zIndex: value, position: 'relative' }}>
                         <motion.div
                           key={e._id}
                           layout
@@ -287,11 +287,12 @@ function Votepage() {
         </Grid>
         {/* <Wave /> */}
         <Button sx={{
-          position: 'absolute',
-          right: 25,
+          left: "92%",
+          top: "28px",
           bottom: 0,
           fontSize: '18px'
-        }} variant='outlined' color="primary" backgroundColor="white" onClick={Summary}>Summary</Button>
+        }} variant='outlined' color="primary" backgroundColor="white" onClick={Summary}>Summary
+        </Button>
       </Container>
     </div>
   )
