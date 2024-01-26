@@ -17,7 +17,7 @@ import NavBar from './components/Navbar/Navbar.js';
 const userContext = React.createContext()
 
 function App() {
-  const [point,setPoint] = useState(0)
+  const [point,setPoint] = useState(null)
   const [data, setData] = useState([])
   const [alert, setAlert] = useState(false)
   const [centent, setContent] = useState("")
@@ -61,7 +61,7 @@ function App() {
     if (searchTerm === "") {
       return val
     }
-    else if (val.title.toLowerCase().includes(searchTerm.toLowerCase()) || val.speaker.includes(searchTerm) || val.category.toLowerCase().includes(searchTerm.toLowerCase())) {
+    else if (val.title.toLowerCase().includes(searchTerm.toLowerCase()) || val.speaker.toLowerCase().includes(searchTerm.toLowerCase()) || val.category.toLowerCase().includes(searchTerm.toLowerCase())) {
       return val
     }
 

@@ -204,7 +204,7 @@ export default function TopicCard({ data, callback, index }) {
                                     WebkitLineClamp: 3,
                                     WebkitBoxOrient: "vertical",
                                     fontWeight: '700',
-                                    fontSize: 24,
+                                    fontSize: 20,
                                     mt: 2,
                                     fontFamily: 'Noto Sans Thai',
                                     justifyContent: 'center',
@@ -260,7 +260,7 @@ export default function TopicCard({ data, callback, index }) {
                                 </Box>
                             ) : null}
 
-                            <Grid sx={{ flexGrow: 1, direction: "row", justifyContent: 'space-evenly' }} container spacing={1} >
+                            <Grid sx={{ flexGrow: 1, flexDirection: {xs: 'column', sm: 'row'}, justifyContent: 'space-evenly' }} container spacing={1} >
                                 <Grid item>
                                     <Grid container spacing={1}>
                                         <Grid item>

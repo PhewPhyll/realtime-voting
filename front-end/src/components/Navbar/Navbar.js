@@ -7,7 +7,7 @@ import barcampLogo from '../../image/BARCAMP8xl-removebg-preview.png';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material'
 import FavoriteIcon from '@mui/icons-material/Favorite';
-export default function NavBar({ used_point}) {
+export default function NavBar({used_point}) {
   return (
     <AppBar position="fixed">
       <Container maxWidth="xl">
@@ -18,10 +18,10 @@ export default function NavBar({ used_point}) {
           <Typography fontWeight='bold' variant='h7'>
             Realtime Voting
           </Typography>
-          <Box sx={{ display: 'flex', alignItems: 'end', gap: '0.5rem', textAlign: 'center',position: 'absolute', right: '0'  }}>
+          <Box sx={{height: '100%', display: 'flex', alignItems: 'center', gap: '0.5rem', textAlign: 'center',position: 'absolute', right: '0'  }}>
             <FavoriteIcon sx={{ color: '#ff1744' }} />
-            <Typography variant='caption' sx={{fontWeight:  'bold'}}>
-              {10 - used_point}
+            <Typography variant='caption' sx={{fontWeight: 'bold'}}>
+              {used_point ? `${used_point}/10` : "-/10"}
             </Typography>
           </Box>
         </Toolbar>
