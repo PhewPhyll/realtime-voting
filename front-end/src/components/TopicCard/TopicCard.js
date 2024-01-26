@@ -365,7 +365,7 @@ export default function TopicCard({ data, callback, index }) {
                                 </Grid>
                             </Grid>
                             <CardActions sx={{ mt: 1, justifyContent: 'center' }}>
-                                <Button onClick={checker} sx={{ minHeight: "32px", minWidth: "270px", borderRadius: '0.7rem', px: "6rem", display: 'flex', alignItems: 'center', justifyContent: 'center' }} style={{ color: "white", background: check ? colors.red['A400'] : colors = "#27db5d" }}>
+                                <Button onClick={checker} sx={{ minHeight: "32px",width: "fit", minWidth: "200px", maxWidth: "270px", borderRadius: '0.7rem', px: "6rem", display: 'flex', alignItems: 'center', justifyContent: 'center' }} style={{ color: "white", background: check ? colors.red['A400'] : colors = "#27db5d" }}>
                                     <Typography variant='body2' sx={{ fontWeight: '700', whiteSpace: 'nowrap', marginRight: '8px', }}>{check ? "ยกเลิกโหวต" : "โหวต"}</Typography>
                                 </Button>
                             </CardActions>
