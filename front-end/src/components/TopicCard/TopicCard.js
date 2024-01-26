@@ -250,8 +250,7 @@ export default function TopicCard({ data, callback, index }) {
                                         sx={{
                                             mx: 2,
                                             overflow: 'auto',
-                                            fontWeight: '700',
-                                            fontSize: 12,
+                                            fontSize: 16,
                                             fontFamily: 'Noto Sans Thai',
                                             maxHeight: '150px',  // กำหนดความสูงสูงสุด (ตัวอย่างเท่านั้น)
                                         }}
@@ -321,9 +320,6 @@ export default function TopicCard({ data, callback, index }) {
                                     <Typography variant='body2' sx={{ fontWeight: '700', whiteSpace: 'nowrap', marginRight: '8px', }}>{check ? "ยกเลิกโหวต" : "โหวต"}</Typography>
                                 </Button>
                             </CardActions>
-                            {/* <div>
-                                {vote}
-                            </div> */}
                         </DialogContent>
                     </Box>
                 </div>

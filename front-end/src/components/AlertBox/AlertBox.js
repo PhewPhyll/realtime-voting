@@ -15,7 +15,6 @@ function AlertBox({ content, alert , callbackClose }) {
         setOpen(false)
         callbackClose()
     }
-    
 
     return (
         <Dialog
@@ -24,16 +23,16 @@ function AlertBox({ content, alert , callbackClose }) {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">
+            <DialogTitle id="alert-dialog-title" sx={{fontWeight: '700',fontSize: 24,fontFamily: 'Noto Sans Thai',}}>
                 แจ้งเตือน
             </DialogTitle>
             <DialogContent>
-                <DialogContentText id="alert-dialog-description">
+                <DialogContentText id="alert-dialog-description" sx={{fontSize: 16, fontFamily: 'Noto Sans Thai',}}>
                     {content}
                 </DialogContentText>
             </DialogContent>
-            <DialogActions>
-                <Button color='error' variant='contained' onClick={handdleClose} autoFocus>
+            <DialogActions sx={{ mt:-1, justifyContent: 'center' }}>
+                <Button sx={{minHeight:"32px",minWidth:"270px", borderRadius: '0.7rem', px: "6rem", display: 'flex', alignItems: 'center', justifyContent: 'center' ,mb:3 }} color='error'variant='contained' onClick={handdleClose} autoFocus>
                     ปิด
                 </Button>
             </DialogActions>
