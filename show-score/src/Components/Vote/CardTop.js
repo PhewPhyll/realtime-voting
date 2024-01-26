@@ -9,22 +9,40 @@ function CardTop({ data, index }) {
       backgroundColor: `rgba(255 , 150 , 55 , ${4 / (index + 1)})`,
       borderRadius: '1rem',
       position: 'relative',
+      justifyItems: 'center',
     }}>
       <CardContent sx={{
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
-        height: '75%'
+        height: '80%'
       }}>
-        <Typography fontWeight='bold' noWrap textOverflow='ellipsis' sx={{
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          display: "-webkit-box",
-          whiteSpace: 'pre-wrap',
-          WebkitLineClamp: 3,
-          WebkitBoxOrient: "vertical",
-          textAlign : 'center'
-        }} variant='h5'>{data.title}</Typography>
+        <div style={{ textAlign: 'center' , maxWidth : "180px", marginRight : "38px"}}>
+          <Typography
+            fontWeight='bold'
+            noWrap
+            textOverflow='ellipsis'
+            sx={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "-webkit-box",
+              whiteSpace: 'pre-wrap',
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: "vertical",
+            }}
+            variant='h6'
+            pr={"10px"}
+          >
+            {data.title}
+          </Typography>
+          <Typography
+            fontWeight='bold'
+            variant='h6'
+          >
+            by {data.speaker}
+          </Typography>
+        </div>
+        <div style={{ position : "absolute", right : "0",margin : "12px" }}>
         <Typography fontWeight='bold' sx={{
           backgroundColor: '#fff',
           borderRadius: '100%',
@@ -34,8 +52,9 @@ function CardTop({ data, index }) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center'
-        }} variant='h5'>{data.votes}</Typography>
+        }} variant='h6'>{data.votes}</Typography></div>
       </CardContent>
+      
     </Card>
   )
 }

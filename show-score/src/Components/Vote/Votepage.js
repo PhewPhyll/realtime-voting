@@ -10,9 +10,20 @@ import Wave from '../FooterWave/Wave'
 import xlsx from 'json-as-xlsx'
 import Crab from '../Crab/Crab'
 import Crab_small from '../Crab/Crab_small'
+import AdjustableValue from './Top_n'
+import logobarcamp1 from "./logobarcamp1.png"
+import logobarcamp2 from "./logobarcamp2.png"
 
 function Votepage() {
+  const [value, setValue] = useState(10);
 
+  const incrementValue = () => {
+    setValue(value + 1);
+  };
+
+  const decrementValue = () => {
+    setValue(value - 1);
+  };
   const [allTopics, setAllTopics] = useState([])
 
   useEffect(() => {
@@ -153,14 +164,17 @@ function Votepage() {
       <Container maxWidth="90%" sx={{ pt: '3rem', pb: '4rem' }}>
         <Grid container columns={10} spacing={2} sx={{ height: '90vh', }}>
           <Grid item xl={4}>
-            <Card elevation={5} sx={{ 
+            <Card elevation={5} sx={{
               height: '100%',
-            borderRadius: '1rem', 
-            position: 'relative',
-            background : '#fff',
+              borderRadius: '1rem',
+              position: 'relative',
+              background: '#fff',
             }}>
               <CardContent sx={{ height: '100%' }}>
-                <Typography sx={{ textAlign: "center" }} fontWeight='bold' color='#FF0000' variant='h2'>TOP 10</Typography>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <Typography sx={{ textAlign: "center" }} marginLeft='auto' marginRight='23%' fontWeight='bold' color='#FF0000' variant='h3'>TOP {value}</Typography>
+                  <AdjustableValue value={value} onIncrement={incrementValue} onDecrement={decrementValue} />
+                </div>
                 <Grid
                   sx={{ height: '100%', mt: '1rem' }}
                   container
@@ -170,7 +184,7 @@ function Votepage() {
                   alignContent='start'
                 >
                   <AnimatePresence>
-                    {allTopics.sort((a, b) => b.votes - a.votes).filter(e => e.votes >= 3).slice(0, 10).map((e, i) =>
+                    {allTopics.sort((a, b) => b.votes - a.votes).filter(e => e.votes >= 3).slice(0, value).map((e, i) =>
                       <Grid item xl={6} key={e._id}>
                         <motion.div
                           key={e._id}
@@ -186,7 +200,7 @@ function Votepage() {
                   </AnimatePresence>
                 </Grid>
               </CardContent>
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 2 }}
@@ -239,13 +253,13 @@ function Votepage() {
                     }}  />
                   </div>
                 </Box>
-              </motion.div>
+              </motion.div> */}
             </Card>
           </Grid>
           <Grid item xl={6}>
             <Card elevation={5} sx={{ height: '100%', borderRadius: '1rem' }}>
-              <CardContent>
-                <Typography sx={{ textAlign: "center" }} fontWeight='bold' color='#FF0000' variant='h4'>Topics</Typography>
+              <CardContent sx={{ height: '100%', backgroundImage: `url(${logobarcamp2})`, backgroundSize: '80%', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}>
+                <Typography sx={{ textAlign: "center" }} fontWeight='bold' color='#FF0000' variant='h3'>Topics</Typography>
                 <Grid sx={{ height: '100%', mt: '1rem' }}
                   container
                   columns={12}
@@ -253,7 +267,7 @@ function Votepage() {
                   alignContent="center">
                   <AnimatePresence>
                     {allTopics.sort((a, b) => b.votes - a.votes).filter(e => e.votes >= 3).slice(10, allTopics.length).map((e, i) =>
-                      <Grid key={e._id} item xl={4} sx={{ zIndex : 10, position : 'relative' }}>
+                      <Grid key={e._id} item xl={4} sx={{ zIndex: 10, position: 'relative' }}>
                         <motion.div
                           key={e._id}
                           layout
@@ -274,10 +288,10 @@ function Votepage() {
         {/* <Wave /> */}
         <Button sx={{
           position: 'absolute',
-          right: 30,
-          bottom: 5,
-          fontSize: '18px' 
-        }} variant='text' onClick={Summary}>Summary</Button>
+          right: 25,
+          bottom: 0,
+          fontSize: '18px'
+        }} variant='outlined' color="primary" backgroundColor="white" onClick={Summary}>Summary</Button>
       </Container>
     </div>
   )
