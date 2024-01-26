@@ -58,12 +58,12 @@
 	margin: 0 auto;
 	position: relative;
 	animation-delay: 1s;
-	background: #70c4c6;
-	animation-name: daylight;
-	animation-duration: 20s;
+	/* background: #70c4c6; */
+	/* animation-name: daylight; */
+	/* animation-duration: 20s;
 	animation-iteration-count: infinite;
 	overflow: hidden;
-	animation-timing-function: linear;
+	animation-timing-function: linear; */
 }
 .eclipse {
 	width: 200px;

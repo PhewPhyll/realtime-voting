@@ -11,12 +11,13 @@ import backend from './Services/backend'
 //Style
 import './components/Scrollbar/Scrollbar.css'
 import AlertBox from './components/AlertBox/AlertBox';
+import NavBar from './components/Navbar/Navbar.js';
 // import Decrypt from './Services/Decrypt';
 
 const userContext = React.createContext()
 
 function App() {
-
+  const [point,setPoint] = useState(0)
   const [data, setData] = useState([])
   const [alert, setAlert] = useState(false)
   const [centent, setContent] = useState("")
@@ -35,11 +36,12 @@ function App() {
           let me_vote = res.data.topics_to_send.filter(e => e.status)
           let not_vote = res.data.topics_to_send.filter(e => !e.status).sort(() => 0.5 - Math.random())
           setData(me_vote.concat(not_vote))
+          setPoint(res.data.topics_to_send.filter(e => e.status).length)
         } else {
 
           setContent("ขณะนี้ยังไม่เปิดให้โหวต หรือหมดเวลาโหวต กรุณารอให้ถึงเวลาแล้วเข้ามาอีกครั้ง")
           setAlert(true)
-
+          
         }
 
       })
@@ -49,7 +51,6 @@ function App() {
       setAlert(true)
 
     }
-
   }, [user])
 
   const [searchTerm, setSearchTerm] = useState('')
@@ -60,7 +61,7 @@ function App() {
     if (searchTerm === "") {
       return val
     }
-    else if (val.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+    else if (val.title.toLowerCase().includes(searchTerm.toLowerCase()) || val.speaker.includes(searchTerm) || val.category.toLowerCase().includes(searchTerm.toLowerCase())) {
       return val
     }
 
@@ -80,12 +81,26 @@ function App() {
     let not_vote = dummy.filter(e => !e.status)
 
     setData(me_vote.concat(not_vote))
-
+    setPoint(dummy.filter(e => e.status).length)
   }
+
+  
+  // const count_remaining_point = (res) => {
+  //   let dummy = data.map(e => {
+  //     if (e._id === res._id) {
+  //       e.status = !e.status
+  //     }
+  //     return e
+  //   })
+
+  //   setPoint(dummy.filter(e => e.status).length)
+  // }
 
   return (
     <userContext.Provider value={user}>
-      <Box sx={{
+      <div>
+        <NavBar used_point={point}/>
+        <Box sx={{
         display: 'flex',
         flexDirection: 'column',
         minHeight : '100vh'
@@ -94,7 +109,7 @@ function App() {
           zIndex: 200,
           padding: '1rem',
           position: 'sticky',
-          mt: '7rem',
+          mt: '3rem',
           top: '3.7rem'
         }}>
           {alert ? <Typography sx={{
@@ -111,7 +126,7 @@ function App() {
               />
             </Container>}
         </Box>
-        <Container maxWidth='lg' sx={{ mt: '1rem', mb: '5rem' }}>
+        <Container maxWidth='lg' sx={{ mt: '1rem', mb: '1rem' }}>
           <AnimatePresence>
             <Grid container spacing={2} columns={12}>
               {data.filter(search_filter).map((e, i) =>
@@ -128,9 +143,10 @@ function App() {
         </Container>
         <Footer />
       </Box>
+      </div>
+      
     </userContext.Provider>
-
-  );
+    );
 }
 
 export { userContext }

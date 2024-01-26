@@ -7,7 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const Searchbar = ({ placeholder, onChange }) => {
     return (
-        <Box>
+        <Box >
             <TextField
                 fullWidth
                 color='secondary'

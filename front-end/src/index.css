@@ -1,6 +1,12 @@
 body {
-  background: rgb(225,149,0);
-  background: linear-gradient(180deg, rgba(225,149,0,1) 0%, rgba(231,0,0,1) 100%);
+  /* background: rgb(255,236,149);
+  background: linear-gradient(180deg, rgba(255,236,149,1) 0%, rgba(255,194,147,1) 100%); */
+  animation-delay: 1s;
+	background: #70c4c6;
+	animation-name: daylight;
+	animation-duration: 20s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
   margin: 0;
   /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -16,5 +22,14 @@ code {
     monospace; */
   font-family: "Noto Sans Thai", sans-serif;
   
+}
+
+@keyframes daylight {
+	0% {  background-color: #70c4c6; }
+	15% {  background-color: #524b64; }
+	40% { background-color: #354a4a; }
+	70% { background-color: #354a4a; }
+	80% {  background-color: #e2b553; }
+	100% {  background-color: #70c4c6;}
 }
 

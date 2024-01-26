@@ -40,6 +40,7 @@ export default function TopicCard({ data, callback, index }) {
                 setCheck(!check)
                 callback(data)
                 handleClose()
+                console.log(res.data)
             } else {
                 setAlert(true)
                 handleClose()
@@ -54,7 +55,6 @@ export default function TopicCard({ data, callback, index }) {
 
     return (
         <div>
-
             <Card sx={{ borderRadius: '1rem' }} elevation={4} onClick={handleClickOpen}>
                 <CardContent>
                     <Box sx={{
