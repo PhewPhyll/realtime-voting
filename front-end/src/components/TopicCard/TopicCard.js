@@ -118,8 +118,7 @@ export default function TopicCard({ data, callback, index }) {
                                     WebkitLineClamp: 3,
                                     WebkitBoxOrient: 'vertical',
                                     fontWeight: '700',
-                                    fontSize: isMobileSize() ? '12px' : '16px',
-                                    mt: 2,
+                                    fontSize: isMobileSize() ? '16px' : '20px',
                                     fontFamily: 'Noto Sans Thai',
                                     justifyContent: 'center',
                                 }}
